@@ -1,0 +1,521 @@
+sans perturbe; restart = 2 => tours : 2181 , restart : 172 , perturbe : 0 ; temps de calcul de l'algo incomplet : 0.540508
+
+sans perturbe; restart = 1 => tours : 2009 , restart : 172 , perturbe : 0 ; temps de calcul de l'algo incomplet : 0.503896
+
+perturbe <= 0; restart = 1 => tours : 87 , restart : 17 , perturbe : 70 ; temps de calcul de l'algo incomplet : 0.033887
+
+perturbe <= 1; restart = 2 => tours : 111 , restart : 17 , perturbe : 94 ; temps de calcul de l'algo incomplet : 0.051498
+
+perturbe <= 2; restart = 3 => tours : 128 , restart : 17 , perturbe : 111 ; temps de calcul de l'algo incomplet : 0.054362
+
+perturbe <= 3; restart = 4 => tours : 145 , restart : 17 , perturbe : 128 ; temps de calcul de l'algo incomplet : 0.061749
+
+
+-------------------------------------------
+
+sans permutation des lignes et colones
+
+restart = 1 => tours : 142 , restart : 33 , perturbe : 142 ; temps de calcul de l'algo incomplet : 0.026181
+
+restart = 2 => tours : 179 , restart : 33 , perturbe : 179 ; temps de calcul de l'algo incomplet : 0.031194
+
+restart = 3 => tours : 212 , restart : 33 , perturbe : 212 ; temps de calcul de l'algo incomplet : 0.038195
+
+restart = 4 => tours : 245 , restart : 33 , perturbe : 245 ; temps de calcul de l'algo incomplet : 0.042261
+
+
+
+------------------------------------------
+ancien temps moindre carré (juste j2 = j1; au lieu de if then else)
+
+tours : 303 , restart : 63 , perturbe : 303
+temps de calcul de l'algo incomplet : 0.120688
+solution trouvé par l'algorithme incomplet :
+19 3 1 22 20 
+7 9 25 18 6 
+14 17 10 8 16 
+21 13 5 15 11 
+4 23 24 2 12 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+g++     main.cpp grille.hpp incomplet.cpp complet.cpp grille.cpp  -lpthread -o main
+taille du carre magique : 5
+tours : 303 , restart : 63 , perturbe : 303
+temps de calcul de l'algo incomplet : 0.124593
+solution trouvé par l'algorithme incomplet :
+19 3 1 22 20 
+7 9 25 18 6 
+14 17 10 8 16 
+21 13 5 15 11 
+4 23 24 2 12 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 6
+tours : 624 , restart : 129 , perturbe : 624
+temps de calcul de l'algo incomplet : 0.640164
+solution trouvé par l'algorithme incomplet :
+2 22 36 15 23 13 
+17 4 10 25 31 24 
+29 32 30 1 16 3 
+21 19 5 35 20 11 
+9 28 18 8 14 34 
+33 6 12 27 7 26 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 7
+tours : 662 , restart : 128 , perturbe : 662
+temps de calcul de l'algo incomplet : 1.50503
+solution trouvé par l'algorithme incomplet :
+28 30 38 7 31 23 18 
+45 13 1 42 8 49 17 
+22 19 39 16 44 15 20 
+11 47 9 4 26 35 43 
+12 34 10 25 37 33 24 
+36 29 32 40 27 6 5 
+21 3 46 41 2 14 48 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 8
+tours : 2591 , restart : 495 , perturbe : 2591
+temps de calcul de l'algo incomplet : 11.8594
+solution trouvé par l'algorithme incomplet :
+3 5 46 28 35 57 61 25 
+11 44 45 16 50 60 1 33 
+62 34 54 15 43 26 4 22 
+47 31 20 58 6 7 53 38 
+36 2 18 49 23 17 63 52 
+8 48 42 30 12 29 59 32 
+37 55 21 51 27 40 10 19 
+56 41 14 13 64 24 9 39 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 9
+tours : 274 , restart : 52 , perturbe : 274
+temps de calcul de l'algo incomplet : 2.3699
+solution trouvé par l'algorithme incomplet :
+11 6 58 50 53 69 5 45 72 
+81 57 47 19 4 62 2 60 37 
+32 15 75 68 40 21 44 49 25 
+33 52 3 26 70 10 76 63 36 
+34 51 23 20 56 42 12 77 54 
+9 39 35 29 13 65 55 46 78 
+80 64 1 73 28 61 38 8 16 
+59 67 48 43 31 17 66 14 24 
+30 18 79 41 74 22 71 7 27 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 10
+tours : 220 , restart : 39 , perturbe : 220
+temps de calcul de l'algo incomplet : 3.37938
+solution trouvé par l'algorithme incomplet :
+100 16 10 6 35 63 86 39 62 88 
+4 32 9 96 18 97 75 92 21 61 
+94 78 25 44 66 79 22 17 60 20 
+99 5 83 49 55 46 56 45 14 53 
+34 91 93 90 27 48 7 67 19 29 
+23 84 42 73 82 12 64 52 72 1 
+41 13 37 51 95 81 54 38 65 30 
+71 47 77 31 40 33 28 68 36 74 
+24 50 70 8 11 43 87 85 58 69 
+15 89 59 57 76 3 26 2 98 80 
+E132896C@I125V7pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 11
+tours : 881 , restart : 159 , perturbe : 881
+temps de calcul de l'algo incomplet : 22.8185
+solution trouvé par l'algorithme incomplet :
+78 87 70 53 39 10 54 34 116 19 111 
+23 119 98 50 74 89 18 28 88 55 29 
+47 20 37 105 49 102 62 64 38 107 40 
+13 79 24 48 99 108 120 65 5 80 30 
+92 61 8 6 59 106 25 63 121 35 95 
+97 100 17 15 26 84 67 81 41 66 77 
+71 2 86 93 46 60 76 91 1 94 51 
+103 32 109 118 31 3 43 16 114 58 44 
+115 110 104 96 83 27 7 72 12 36 9 
+11 4 85 42 75 68 82 101 22 69 112 
+21 57 33 45 90 14 117 56 113 52 73 
+
+
+
+-------------------------------------------------------------------
+nouveau temps avec le plus de contraintes
+
+g++     main.cpp grille.hpp incomplet.cpp complet.cpp grille.cpp  -lpthread -o main
+taille du carre magique : 3
+tours : 62
+temps de calcul de l'algo incomplet : 0.003713
+solution trouvé par l'algorithme incomplet :
+8 3 4 
+1 5 9 
+6 7 2 
+E132896C@Info2B2pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 4
+tours : 93
+temps de calcul de l'algo incomplet : 0.021599
+solution trouvé par l'algorithme incomplet :
+12 1 14 7 
+5 11 8 10 
+4 6 9 15 
+13 16 3 2 
+E132896C@Info2B2pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 5
+tours : 1300
+temps de calcul de l'algo incomplet : 0.781695
+solution trouvé par l'algorithme incomplet :
+25 9 13 15 3 
+12 2 21 6 24 
+10 18 19 7 11 
+1 20 8 14 22 
+17 16 4 23 5 
+E132896C@Info2B2pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 6
+tours : 368
+temps de calcul de l'algo incomplet : 0.620518
+solution trouvé par l'algorithme incomplet :
+9 35 3 34 10 20 
+33 13 18 23 19 5 
+22 6 36 21 25 1 
+28 27 8 7 12 29 
+2 26 30 15 14 24 
+17 4 16 11 31 32 
+E132896C@Info2B2pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 7
+tours : 1954
+temps de calcul de l'algo incomplet : 7.84316
+solution trouvé par l'algorithme incomplet :
+9 35 41 4 19 31 36 
+49 11 3 24 43 29 16 
+20 44 34 17 2 45 13 
+30 42 18 48 25 7 5 
+12 27 46 21 14 15 40 
+47 6 1 38 33 22 28 
+8 10 32 23 39 26 37 
+E132896C@Info2B2pc02:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 8
+tours : 3611
+temps de calcul de l'algo incomplet : 31.4305
+solution trouvé par l'algorithme incomplet :
+61 45 17 2 58 19 38 20 
+51 21 18 40 13 7 63 47 
+54 48 1 46 28 64 9 10 
+5 41 34 30 27 52 35 36 
+57 23 50 12 55 29 8 26 
+22 37 56 42 3 16 59 25 
+6 14 60 39 44 11 33 53 
+4 31 24 49 32 62 15 43 
+
+
+
+----------------------------------------------------------
+nouveau temps moindre carré
+
+
+taille du carre magique : 3
+tours : 1 ; restart : 0
+temps de calcul de l'algo incomplet : 0.000121
+solution trouvé par l'algorithme incomplet :
+2 7 6 
+9 5 1 
+4 3 8 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 4
+tours : 3 ; restart : 0
+temps de calcul de l'algo incomplet : 0.000936
+solution trouvé par l'algorithme incomplet :
+1 12 14 7 
+8 13 11 2 
+15 6 4 9 
+10 3 5 16 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 5
+tours : 199 ; restart : 45
+temps de calcul de l'algo incomplet : 0.127973
+solution trouvé par l'algorithme incomplet :
+23 25 12 3 2 
+9 5 17 24 10 
+13 8 14 19 11 
+16 21 7 1 20 
+4 6 15 18 22 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 6
+tours : 92 ; restart : 18
+temps de calcul de l'algo incomplet : 0.158924
+solution trouvé par l'algorithme incomplet :
+14 31 30 4 11 21 
+19 3 34 20 18 17 
+8 5 13 36 25 24 
+35 15 6 26 22 7 
+33 28 1 16 23 10 
+2 29 27 9 12 32 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 7
+tours : 190 ; restart : 46
+temps de calcul de l'algo incomplet : 0.794409
+solution trouvé par l'algorithme incomplet :
+49 43 47 1 5 18 12 
+2 21 48 16 46 25 17 
+4 8 22 36 32 34 39 
+37 28 24 10 27 9 40 
+35 3 13 38 31 44 11 
+7 42 15 45 14 19 33 
+41 30 6 29 20 26 23 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 8
+tours : 55 ; restart : 11
+temps de calcul de l'algo incomplet : 0.484979
+solution trouvé par l'algorithme incomplet :
+35 13 62 45 51 18 11 25 
+64 36 9 26 34 32 6 53 
+43 33 55 41 27 23 22 16 
+38 21 17 12 58 44 31 39 
+20 30 10 15 47 29 50 59 
+28 3 48 42 40 4 46 49 
+8 61 52 19 2 56 57 5 
+24 63 7 60 1 54 37 14 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 9
+tours : 116 ; restart : 23
+temps de calcul de l'algo incomplet : 1.99928
+solution trouvé par l'algorithme incomplet :
+69 53 63 67 1 4 10 57 45 
+20 8 21 49 65 79 41 39 47 
+81 24 33 31 5 80 29 64 22 
+27 70 11 36 60 26 77 3 59 
+74 25 30 56 28 16 75 50 15 
+37 42 12 46 43 32 44 51 62 
+38 35 78 13 48 7 73 68 9 
+17 72 66 19 58 71 18 14 34 
+6 40 55 52 61 54 2 23 76 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 10
+tours : 175 ; restart : 35
+temps de calcul de l'algo incomplet : 5.52833
+solution trouvé par l'algorithme incomplet :
+63 93 9 53 68 48 2 69 81 19 
+5 72 78 76 47 12 28 80 13 94 
+73 35 46 65 31 71 50 56 11 67 
+22 66 79 61 51 58 82 33 38 15 
+64 26 23 42 4 86 74 83 85 18 
+7 37 84 14 49 44 77 16 87 90 
+92 45 55 36 40 29 70 39 75 24 
+52 96 98 41 59 43 25 21 8 62 
+95 34 30 17 57 60 6 20 97 89 
+32 1 3 100 99 54 91 88 10 27 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 11
+tours : 78 ; restart : 16
+temps de calcul de l'algo incomplet : 4.27199
+solution trouvé par l'algorithme incomplet :
+35 78 25 7 119 16 51 85 73 84 98 
+65 102 13 47 120 66 27 92 91 19 29 
+118 9 72 107 48 38 86 26 75 4 88 
+74 108 79 43 67 54 68 64 3 93 18 
+31 17 110 112 40 101 15 11 87 103 44 
+5 97 14 61 33 90 80 116 8 117 50 
+60 1 115 96 32 34 81 24 70 59 99 
+106 109 49 62 21 71 28 63 95 10 57 
+6 22 83 2 41 113 121 100 46 55 82 
+77 39 69 114 45 52 58 53 111 23 30 
+94 89 42 20 105 36 56 37 12 104 76 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 12
+tours : 92 ; restart : 16
+temps de calcul de l'algo incomplet : 8.3628
+solution trouvé par l'algorithme incomplet :
+1 9 45 97 143 124 33 84 111 128 59 36 
+34 76 11 77 142 70 121 51 43 48 57 140 
+55 139 123 46 40 19 68 133 8 2 130 107 
+127 101 25 67 21 81 75 66 42 91 120 54 
+18 93 115 49 5 104 15 83 95 132 98 63 
+135 14 22 82 125 79 100 56 105 58 44 50 
+112 88 144 60 39 129 27 17 85 20 126 23 
+4 24 26 71 86 80 103 141 53 117 29 136 
+109 16 89 38 35 78 116 41 122 113 7 106 
+28 61 69 87 64 90 114 52 47 119 31 108 
+137 118 102 134 138 3 6 72 65 12 73 10 
+110 131 99 62 32 13 92 74 94 30 96 37 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ ./main
+taille du carre magique : 13
+tours : 151 ; restart : 30
+temps de calcul de l'algo incomplet : 21.8245
+solution trouvé par l'algorithme incomplet :
+138 130 94 6 3 66 98 25 46 125 129 153 92 
+65 87 111 147 100 75 61 152 57 105 56 9 80 
+11 40 34 71 110 109 101 22 120 160 97 91 139 
+115 142 161 121 162 27 32 74 50 26 89 70 36 
+47 78 41 131 116 135 28 60 104 137 21 95 112 
+62 37 20 39 24 82 136 157 18 164 150 88 128 
+72 127 106 38 35 68 64 113 167 51 86 45 133 
+119 30 1 114 81 43 134 124 90 85 84 151 49 
+126 93 156 52 132 140 53 8 118 4 159 54 10 
+96 73 107 103 168 76 31 58 102 29 42 141 79 
+83 123 154 67 14 55 165 148 149 17 13 48 69 
+169 122 108 99 155 63 59 145 77 44 33 16 15 
+2 23 12 117 5 166 143 19 7 158 146 144 163 
+
+
+
+-----------------------------------------------
+avec les scores des moindres carrés, nouvelle version et initialisation deterministe dans l'ordre
+
+g++     main.cpp grille.hpp incomplet.cpp complet.cpp grille.cpp  -lpthread -o main
+taille du carre magique : 3
+tours : 2 ; restart : 0
+temps de calcul de l'algo incomplet : 0.000205
+solution trouvé par l'algorithme incomplet :
+4 9 2 
+3 5 7 
+8 1 6 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 4
+tours : 8 ; restart : 1
+temps de calcul de l'algo incomplet : 0.002473
+solution trouvé par l'algorithme incomplet :
+1 12 14 7 
+8 13 11 2 
+15 6 4 9 
+10 3 5 16 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 5
+tours : 204 ; restart : 46
+temps de calcul de l'algo incomplet : 0.131482
+solution trouvé par l'algorithme incomplet :
+23 25 12 3 2 
+9 5 17 24 10 
+13 8 14 19 11 
+16 21 7 1 20 
+4 6 15 18 22 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 6
+tours : 96 ; restart : 19
+temps de calcul de l'algo incomplet : 0.169102
+solution trouvé par l'algorithme incomplet :
+14 31 30 4 11 21 
+19 3 34 20 18 17 
+8 5 13 36 25 24 
+35 15 6 26 22 7 
+33 28 1 16 23 10 
+2 29 27 9 12 32 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 7
+tours : 196 ; restart : 47
+temps de calcul de l'algo incomplet : 0.807526
+solution trouvé par l'algorithme incomplet :
+49 43 47 1 5 18 12 
+2 21 48 16 46 25 17 
+4 8 22 36 32 34 39 
+37 28 24 10 27 9 40 
+35 3 13 38 31 44 11 
+7 42 15 45 14 19 33 
+41 30 6 29 20 26 23 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 8
+tours : 60 ; restart : 12
+temps de calcul de l'algo incomplet : 0.530838
+solution trouvé par l'algorithme incomplet :
+35 13 62 45 51 18 11 25 
+64 36 9 26 34 32 6 53 
+43 33 55 41 27 23 22 16 
+38 21 17 12 58 44 31 39 
+20 30 10 15 47 29 50 59 
+28 3 48 42 40 4 46 49 
+8 61 52 19 2 56 57 5 
+24 63 7 60 1 54 37 14 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 9
+tours : 122 ; restart : 24
+temps de calcul de l'algo incomplet : 2.10241
+solution trouvé par l'algorithme incomplet :
+69 53 63 67 1 4 10 57 45 
+20 8 21 49 65 79 41 39 47 
+81 24 33 31 5 80 29 64 22 
+27 70 11 36 60 26 77 3 59 
+74 25 30 56 28 16 75 50 15 
+37 42 12 46 43 32 44 51 62 
+38 35 78 13 48 7 73 68 9 
+17 72 66 19 58 71 18 14 34 
+6 40 55 52 61 54 2 23 76 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 10
+tours : 183 ; restart : 36
+temps de calcul de l'algo incomplet : 5.78392
+solution trouvé par l'algorithme incomplet :
+63 93 9 53 68 48 2 69 81 19 
+5 72 78 76 47 12 28 80 13 94 
+73 35 46 65 31 71 50 56 11 67 
+22 66 79 61 51 58 82 33 38 15 
+64 26 23 42 4 86 74 83 85 18 
+7 37 84 14 49 44 77 16 87 90 
+92 45 55 36 40 29 70 39 75 24 
+52 96 98 41 59 43 25 21 8 62 
+95 34 30 17 57 60 6 20 97 89 
+32 1 3 100 99 54 91 88 10 27 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 11
+tours : 84 ; restart : 17
+temps de calcul de l'algo incomplet : 4.62092
+solution trouvé par l'algorithme incomplet :
+35 78 25 7 119 16 51 85 73 84 98 
+65 102 13 47 120 66 27 92 91 19 29 
+118 9 72 107 48 38 86 26 75 4 88 
+74 108 79 43 67 54 68 64 3 93 18 
+31 17 110 112 40 101 15 11 87 103 44 
+5 97 14 61 33 90 80 116 8 117 50 
+60 1 115 96 32 34 81 24 70 59 99 
+106 109 49 62 21 71 28 63 95 10 57 
+6 22 83 2 41 113 121 100 46 55 82 
+77 39 69 114 45 52 58 53 111 23 30 
+94 89 42 20 105 36 56 37 12 104 76 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 12
+tours : 98 ; restart : 17
+temps de calcul de l'algo incomplet : 8.9293
+solution trouvé par l'algorithme incomplet :
+1 9 45 97 143 124 33 84 111 128 59 36 
+34 76 11 77 142 70 121 51 43 48 57 140 
+55 139 123 46 40 19 68 133 8 2 130 107 
+127 101 25 67 21 81 75 66 42 91 120 54 
+18 93 115 49 5 104 15 83 95 132 98 63 
+135 14 22 82 125 79 100 56 105 58 44 50 
+112 88 144 60 39 129 27 17 85 20 126 23 
+4 24 26 71 86 80 103 141 53 117 29 136 
+109 16 89 38 35 78 116 41 122 113 7 106 
+28 61 69 87 64 90 114 52 47 119 31 108 
+137 118 102 134 138 3 6 72 65 12 73 10 
+110 131 99 62 32 13 92 74 94 30 96 37 
+E132896C@Info2B2pc03:~/Desktop/programmation par contrainte$ make && ./main
+make: Rien à faire pour « all ».
+taille du carre magique : 13
+tours : 158 ; restart : 31
+temps de calcul de l'algo incomplet : 22.9001
+solution trouvé par l'algorithme incomplet :
+138 130 94 6 3 66 98 25 46 125 129 153 92 
+65 87 111 147 100 75 61 152 57 105 56 9 80 
+11 40 34 71 110 109 101 22 120 160 97 91 139 
+115 142 161 121 162 27 32 74 50 26 89 70 36 
+47 78 41 131 116 135 28 60 104 137 21 95 112 
+62 37 20 39 24 82 136 157 18 164 150 88 128 
+72 127 106 38 35 68 64 113 167 51 86 45 133 
+119 30 1 114 81 43 134 124 90 85 84 151 49 
+126 93 156 52 132 140 53 8 118 4 159 54 10 
+96 73 107 103 168 76 31 58 102 29 42 141 79 
+83 123 154 67 14 55 165 148 149 17 13 48 69 
+169 122 108 99 155 63 59 145 77 44 33 16 15 
+2 23 12 117 5 166 143 19 7 158 146 144 163 
+
+
