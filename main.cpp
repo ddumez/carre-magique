@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "grille.hpp"
+#include "variable.hpp"
 #include "complet.hpp"
 #include "incomplet.hpp"
 
@@ -41,6 +42,7 @@ int main() {
 		cout<<"solution trouvé par l'algorithme incomplet :"<<endl;
 		soluceI->affiche();
 		
+		toti = 0;
 		for(int i = 0; i<10; ++i) {
 			ti = clock();
 			delete(resolI(k));

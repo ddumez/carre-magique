@@ -1,3 +1,10 @@
+/**
+ * \file incomplet.hpp
+ * \brief définition des fonction de l'algo de resolution incomplet
+ * \author Dorian D.
+ */
+
+
 #include <vector>
 
 #include "grille.hpp"
@@ -6,10 +13,10 @@
 #define INCOMPLET
 
 /**
-* retroune un carre magique normal de taille k remplit
+* \brief retroune un carre magique normal de taille k remplit
 *
-* @param[in] k la taille du carré magique souhaité
-* @return un tableau de taille k*k contenant un carré magique normal de taille k
+* \param[in] k la taille du carré magique souhaité
+* \return un tableau de taille k*k contenant un carré magique normal de taille k
 */
 grille * resolI(int k);
 

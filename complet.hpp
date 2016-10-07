@@ -1,4 +1,11 @@
-#include "grille.hpp"
+/**
+ * \file complet.hpp
+ * \brief définition des fonction de l'algo de resolution complet
+ * \author Dorian D.
+ */
+
+
+#include "variable.hpp"
 
 #ifndef COMPLET
 #define COMPLET
