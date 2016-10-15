@@ -75,6 +75,66 @@ class carre {
 		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur
 		*/ 
 		bool culdesac() const;
+
+		/**
+		* \brief calcule la somme des valeur assigne sur la ligne i
+		* 
+		* \param[in] i le numero de la ligne dont on doit calculer la somme
+		* \return la somme des valeurs des variable de la iemme ligne
+		*/
+		int suml(const int i) const;
+
+		/**
+		* \brief calcule la somme des valeurs assigne sur la colone j
+		* 
+		* \param[in] j le numero de la colone dont on doit calculer la somme
+		* \return la somme des valeurs des variable de la jemme colone
+		*/
+		int sumc(const int j) const;
+
+		/**
+		* \brief calcule la somme des valeurs assigne sur 1ere diagonale
+		* 
+		* \return la somme des valeurs des variable de la 1ere diagonale
+		*/
+		int sumd1() const;
+
+		/**
+		* \brief calcule la somme des valeurs assigne sur 1ere diagonale
+		* 
+		* \return la somme des valeurs des variable de la 1ere diagonale
+		*/
+		int sumd2() const;
+
+		/**
+		* \brief regarde si toutes la variables de la iemme ligne ont une valeur
+		*
+		* \param[in] i la ligne a etudier
+		* \return vrai ssi toutes les variables de la iemme ligne ont une valeur associe
+		*/
+		bool allassignligne(const int i) const;
+
+		/**
+		* \brief regarde si toutes la variables de la jemme colone ont une valeur
+		*
+		* \param[in] j la colone a etudier
+		* \return vrai ssi toutes les variables de la jemme colone ont une valeur associe
+		*/
+		bool allasigncolone(const int j) const;
+
+		/**
+		* \brief regarde si toutes la variables de la 1ere diagonale ont une valeur
+		*
+		* \return vrai ssi toutes les variables de la 1ere diagonale ont une valeur associe
+		*/
+		bool allassignd1 () const;
+
+		/**
+		* \brief regarde si toutes la variables de la 2eme diagonale ont une valeur
+		*
+		* \return vrai ssi toutes les variables de la 2eme diagonale ont une valeur associe
+		*/
+		bool allassignd2() const;
 };
 
 #endif

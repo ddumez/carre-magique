@@ -83,3 +83,75 @@ bool carre::culdesac() const {
 	}
 	return res;
 }
+
+int carre::suml(const int i) const {
+	int res = 0;
+	for(int j = 0; j<k ++j) {
+		res += this->grille.at(i).at(j).getval();
+	}
+	return res;
+}
+
+int carre::sumc(const int j) const {
+	int res = 0;
+	for(int i = 0; i<k ++i) {
+		res += this->grille.at(i).at(j).getval();
+	}
+	return res;
+}
+
+int carre::sumd1() const {
+	int res = 0;
+	for(int i = 0; i<k; ++i) {
+		res += this->grille.at(i).at(i).getval();
+	}
+	return res;
+}
+
+int carre::sumd2() const {
+	int res = 0;
+	for(int i = 0; i<k; ++i) {
+		res += this->grille.at(i).at(this->k - i).getval();
+	}
+	return res;
+}
+
+bool carre::allassignligne(const int i) const {
+	bool res = true;
+	int j = 0;
+	while ( (j<k) && res ) {
+		res = res && (0 != this->grille.at(i).at(j).getval());
+		++j;
+	}
+	return res;
+}
+
+bool carre::allasigncolone(const int j) const {
+	bool res = true;
+	int i = 0;
+	while ( (i<k) && res ) {
+		res = res && (0 != this->grille.at(i).at(j).getval());
+		++i;
+	}
+	return res;
+}
+
+bool carre::allassignd1 () const {
+	bool res = true;
+	int i = 0;
+	while ( (i<k) && res ) {
+		res = res && (0 != this->grille.at(i).at(i).getval());
+		++i;
+	}
+	return res;
+}
+
+bool carre::allassignd2() const {
+	bool res = true;
+	int i = 0;
+	while ( (i<k) && res ) {
+		res = res && (0 != this->grille.at(i).at(this->k - i).getval());
+		++i;
+	}
+	return res;
+}
