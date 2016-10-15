@@ -1,6 +1,11 @@
 #include "grille.hpp"
 #include "complet.hpp"
 
-grille * resolC(int k) {
+carre * resolC(int k) {
+	//variable
+		carre * sol = new carre(k);
+	//début
+
+	//fin
 
 }

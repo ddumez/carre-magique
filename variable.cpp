@@ -9,11 +9,7 @@ using namespace std;
 variable::variable() {}
 
 variable::variable(const int k) {
-	this->val = 0;
-	
-	for(int i = 1; i<=k*k; ++i) {
-		this->restant.insert(i);
-	}
+	this->initialise(k);
 }
 
 variable::~variable() {}
@@ -32,20 +28,19 @@ void variable::choix(const int val) {
 
 	for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 		if (val != *it) {
-			this->restant.erase(*it);
 			nouv.insert(*it);
 		}
+		this->restant.erase(*it);
 	}
 	this->historique.push_back(nouv);
 }
 
-void variable::nouveauChoix(const int val) {
+void variable::nouveauchoix(const int val) {
 	set<int> nouv;
-	if(1 == this->restant.erase(val)) {
+	if(1 == this->restant.erase(val)) { //si val est present dans restant l'enleve et retourne 1 sinon ne fait rien et retourne 0
 		nouv.insert(val);
 	}
 	this->historique.push_back(nouv);
-
 }
 
 void variable::enlever(const int val) {
@@ -54,11 +49,11 @@ void variable::enlever(const int val) {
 	}
 }
 
-bool variable::estVide() const {
+bool variable::estvide() const {
 	return (0 == this->restant.size());
 }
 
-bool variable::resteUn() const {
+bool variable::resteun() const {
 	return ((0!= this->val) || (1 == this->restant.size()));
 }
 
@@ -68,4 +63,16 @@ int variable::getval() const {
 
 set<int> const * variable::getrestant() const {
 	return &(this->restant) ;
+}
+
+void variable::enleverval() {
+	this->val = 0;
+}
+
+void variable::annule() {
+	//on remet toute les variables filtre par le dernier assignement dans restant
+	for(set<int>::iterator it = historique.back().begin() ; it!=historique.back().end() ; ++it) {
+		this->restant.insert(*it);
+	}
+	this->historique.pop_back();
 }

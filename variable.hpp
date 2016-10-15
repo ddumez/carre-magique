@@ -59,7 +59,7 @@ class variable {
 		*
 		* \param[in] val la valeur prise par cette autre variable
 		*/
-		void nouveauChoix(const int val);
+		void nouveauchoix(const int val);
 
 		/**
 		* \brief enleve une valeur possible à la variable
@@ -73,14 +73,14 @@ class variable {
 		*
 		* \return vrai ssi l'ensemble des valeurs possible restant est vide et qu'elle n'a pas de valeur choisie
 		*/
-		bool estVide() const;
+		bool estvide() const;
 
 		/**
 		* \brief si il ne reste que une seule valeur possible
 		*
 		* \return vrai ssi il ne reste que une seule valeur possible restante ou si la valeur à été choisie, sinon renvoi faux
 		*/
-		bool resteUn() const;
+		bool resteun() const;
 
 		/**
 		* \brief retourne la valeur de la variable, 0 si elle n'a pas ete choisie
@@ -95,6 +95,16 @@ class variable {
 		* \return une reference vers l'ensemble des valeurs restantes
 		*/
 		set<int> const * getrestant() const;
+
+		/**
+		* \brief enleve la veleur de cette variable (la remet a 0)
+		*/
+		void enleverval();
+
+		/**
+		* \brief annule le dernier filtrage
+		*/
+		void annule();
 
 };
 

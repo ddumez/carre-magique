@@ -6,16 +6,17 @@
 
 
 #include "variable.hpp"
+#include "carre.hpp"
 
 #ifndef COMPLET
 #define COMPLET
 
 /**
-* retroune un carre magique normal de taille k remplit
+* \brief retroune un carre magique normal de taille k remplit
 *
-* @param[in] k la taille du carré magique souhaité
-* @return un tableau de taille k*k contenant un carré magique normal de taille k
+* \param[in] k la taille du carré magique souhaité
+* \return la solution sous al forme d'un carre
 */
-grille * resolC(int k);
+carre * resolC(int k);
 
 #endif
