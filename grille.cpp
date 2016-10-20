@@ -323,3 +323,23 @@ void grille::perturbe() {
 		} 
 	//fin
 }
+
+int grille::nouveauscore(const int i1, const int j1, const int i2, const int j2, const int score) const {
+	//variable
+		int res = score;
+	//debut
+		res = res - this->sumC(j1) - this->sumC(j2) - this->sumL(i1) - this->sumL(i2);
+		if (i1 == j1) {
+			res -= this->sumd1();
+		}
+		if(j1 == this->k - i1 + 1) {
+			res -= this->sumd2()
+		}
+		if (i2 == j2) {
+			res -= this->sumd1();
+		}
+		if(j2 == this->k - i2 + 1) {
+			res -= this->sumd2()
+		}
+	//fin
+}

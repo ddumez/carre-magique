@@ -151,6 +151,17 @@ class grille {
 		*/
 		void perturbe();
 
+		/**
+		* \brief pour eviter de recaluler le score en entier
+		*
+		* \param[in] i1 premier indice de la premier case
+		* \param[in] j1 deuxieme indice de la premiere case
+		* \param[in] i2 premier indice de la deuxieme case
+		* \param[in] j2 deuxieme indice de la deuxieme case
+		* \param[in] score le score actuel de la grille
+		* \return le score de la grille si on inverse les deux case decrite en parametre
+		*/
+		int nouveauscore(const int i1, const int j1, const int i2, const int j2, const int score) const;
 };
 
 #endif
