@@ -808,3 +808,235 @@ tours : 305 ; restart : 61
 tours : 70 ; restart : 14
 tours : 42 ; restart : 8
 temps moyen de calcul (10 iterations) pour l'algo incomplet : 37.4962
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+sur mon ordi perf moindre carre avec calcul partiel du score
+
+
+taille du carre magique : 3
+tours : 1 ; restart : 0
+temps de calcul de l'algo incomplet : 0.000326
+solution trouvé par l'algorithme incomplet :
+2 7 6 
+9 5 1 
+4 3 8 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 4
+tours : 3 ; restart : 0
+temps de calcul de l'algo incomplet : 0.001629
+solution trouvé par l'algorithme incomplet :
+1 12 14 7 
+8 13 11 2 
+15 6 4 9 
+10 3 5 16 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 5
+tours : 199 ; restart : 45
+temps de calcul de l'algo incomplet : 0.17602
+solution trouvé par l'algorithme incomplet :
+23 25 12 3 2 
+9 5 17 24 10 
+13 8 14 19 11 
+16 21 7 1 20 
+4 6 15 18 22 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 6
+tours : 92 ; restart : 18
+temps de calcul de l'algo incomplet : 0.197351
+solution trouvé par l'algorithme incomplet :
+14 31 30 4 11 21 
+19 3 34 20 18 17 
+8 5 13 36 25 24 
+35 15 6 26 22 7 
+33 28 1 16 23 10 
+2 29 27 9 12 32 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 7
+tours : 190 ; restart : 46
+temps de calcul de l'algo incomplet : 0.602417
+solution trouvé par l'algorithme incomplet :
+49 43 47 1 5 18 12 
+2 21 48 16 46 25 17 
+4 8 22 36 32 34 39 
+37 28 24 10 27 9 40 
+35 3 13 38 31 44 11 
+7 42 15 45 14 19 33 
+41 30 6 29 20 26 23 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 8
+tours : 55 ; restart : 11
+temps de calcul de l'algo incomplet : 0.371678
+solution trouvé par l'algorithme incomplet :
+35 13 62 45 51 18 11 25 
+64 36 9 26 34 32 6 53 
+43 33 55 41 27 23 22 16 
+38 21 17 12 58 44 31 39 
+20 30 10 15 47 29 50 59 
+28 3 48 42 40 4 46 49 
+8 61 52 19 2 56 57 5 
+24 63 7 60 1 54 37 14 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 9
+tours : 116 ; restart : 23
+temps de calcul de l'algo incomplet : 1.14109
+solution trouvé par l'algorithme incomplet :
+69 53 63 67 1 4 10 57 45 
+20 8 21 49 65 79 41 39 47 
+81 24 33 31 5 80 29 64 22 
+27 70 11 36 60 26 77 3 59 
+74 25 30 56 28 16 75 50 15 
+37 42 12 46 43 32 44 51 62 
+38 35 78 13 48 7 73 68 9 
+17 72 66 19 58 71 18 14 34 
+6 40 55 52 61 54 2 23 76 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 10
+tours : 175 ; restart : 35
+temps de calcul de l'algo incomplet : 2.75133
+solution trouvé par l'algorithme incomplet :
+63 93 9 53 68 48 2 69 81 19 
+5 72 78 76 47 12 28 80 13 94 
+73 35 46 65 31 71 50 56 11 67 
+22 66 79 61 51 58 82 33 38 15 
+64 26 23 42 4 86 74 83 85 18 
+7 37 84 14 49 44 77 16 87 90 
+92 45 55 36 40 29 70 39 75 24 
+52 96 98 41 59 43 25 21 8 62 
+95 34 30 17 57 60 6 20 97 89 
+32 1 3 100 99 54 91 88 10 27 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 11
+tours : 78 ; restart : 16
+temps de calcul de l'algo incomplet : 1.97453
+solution trouvé par l'algorithme incomplet :
+35 78 25 7 119 16 51 85 73 84 98 
+65 102 13 47 120 66 27 92 91 19 29 
+118 9 72 107 48 38 86 26 75 4 88 
+74 108 79 43 67 54 68 64 3 93 18 
+31 17 110 112 40 101 15 11 87 103 44 
+5 97 14 61 33 90 80 116 8 117 50 
+60 1 115 96 32 34 81 24 70 59 99 
+106 109 49 62 21 71 28 63 95 10 57 
+6 22 83 2 41 113 121 100 46 55 82 
+77 39 69 114 45 52 58 53 111 23 30 
+94 89 42 20 105 36 56 37 12 104 76 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 12
+tours : 92 ; restart : 16
+temps de calcul de l'algo incomplet : 3.47438
+solution trouvé par l'algorithme incomplet :
+1 9 45 97 143 124 33 84 111 128 59 36 
+34 76 11 77 142 70 121 51 43 48 57 140 
+55 139 123 46 40 19 68 133 8 2 130 107 
+127 101 25 67 21 81 75 66 42 91 120 54 
+18 93 115 49 5 104 15 83 95 132 98 63 
+135 14 22 82 125 79 100 56 105 58 44 50 
+112 88 144 60 39 129 27 17 85 20 126 23 
+4 24 26 71 86 80 103 141 53 117 29 136 
+109 16 89 38 35 78 116 41 122 113 7 106 
+28 61 69 87 64 90 114 52 47 119 31 108 
+137 118 102 134 138 3 6 72 65 12 73 10 
+110 131 99 62 32 13 92 74 94 30 96 37 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 13
+tours : 151 ; restart : 30
+temps de calcul de l'algo incomplet : 8.37717
+solution trouvé par l'algorithme incomplet :
+138 130 94 6 3 66 98 25 46 125 129 153 92 
+65 87 111 147 100 75 61 152 57 105 56 9 80 
+11 40 34 71 110 109 101 22 120 160 97 91 139 
+115 142 161 121 162 27 32 74 50 26 89 70 36 
+47 78 41 131 116 135 28 60 104 137 21 95 112 
+62 37 20 39 24 82 136 157 18 164 150 88 128 
+72 127 106 38 35 68 64 113 167 51 86 45 133 
+119 30 1 114 81 43 134 124 90 85 84 151 49 
+126 93 156 52 132 140 53 8 118 4 159 54 10 
+96 73 107 103 168 76 31 58 102 29 42 141 79 
+83 123 154 67 14 55 165 148 149 17 13 48 69 
+169 122 108 99 155 63 59 145 77 44 33 16 15 
+2 23 12 117 5 166 143 19 7 158 146 144 163 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 14
+tours : 457 ; restart : 89
+temps de calcul de l'algo incomplet : 36.8079
+solution trouvé par l'algorithme incomplet :
+179 184 188 187 180 69 20 99 17 24 15 79 28 110 
+128 63 112 97 74 94 86 91 85 123 96 90 132 108 
+82 154 57 176 46 162 155 140 55 157 45 32 80 38 
+156 168 138 51 72 62 196 102 118 76 44 39 92 65 
+35 88 129 10 3 119 31 147 26 164 121 161 167 178 
+50 23 195 131 5 189 191 116 56 40 141 172 16 54 
+4 6 8 47 173 175 60 83 53 159 181 136 120 174 
+193 192 9 143 194 66 185 13 186 14 30 104 43 7 
+105 114 21 144 149 77 22 124 103 139 75 19 142 145 
+100 117 42 36 153 150 68 127 37 133 81 101 109 125 
+148 64 169 18 25 41 78 59 183 84 160 152 27 171 
+61 29 71 126 106 34 113 70 190 166 158 87 135 33 
+49 165 182 146 48 130 52 115 107 2 137 134 111 1 
+89 12 58 67 151 11 122 93 163 98 95 73 177 170 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 15
+tours : 212 ; restart : 43
+temps de calcul de l'algo incomplet : 23.6136
+solution trouvé par l'algorithme incomplet :
+214 213 134 52 102 142 36 29 45 58 69 199 139 87 176 
+169 132 99 31 94 206 191 171 197 64 46 30 128 129 8 
+59 44 221 28 48 82 143 181 97 24 164 6 173 207 218 
+140 101 119 95 39 108 126 144 33 212 192 177 131 15 63 
+133 160 124 106 210 103 141 72 156 27 167 35 60 83 118 
+147 127 137 148 174 204 122 84 77 151 135 65 41 67 16 
+7 23 120 114 223 1 40 21 190 193 216 189 159 188 11 
+50 112 56 220 93 162 225 12 19 22 158 205 32 145 184 
+185 154 138 113 149 111 85 68 86 57 55 208 75 186 25 
+3 175 42 165 51 13 38 74 180 49 200 96 194 198 217 
+179 219 116 90 89 9 211 136 166 178 78 73 66 81 4 
+54 14 117 71 150 109 152 195 157 91 76 121 196 10 182 
+107 88 100 155 70 222 125 153 104 215 79 5 61 2 209 
+201 115 92 146 98 53 17 183 20 224 34 163 37 110 202 
+47 18 80 161 105 170 43 172 168 130 26 123 203 187 62 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 16
+tours : 82 ; restart : 15
+temps de calcul de l'algo incomplet : 12.5956
+solution trouvé par l'algorithme incomplet :
+250 222 180 135 204 36 34 13 149 77 186 27 239 40 97 167 
+52 161 71 122 24 115 246 159 8 228 114 166 144 176 192 78 
+146 7 245 241 212 240 197 4 45 6 72 61 43 243 96 198 
+242 256 203 126 145 67 28 103 189 75 182 91 31 73 185 60 
+51 137 41 179 216 141 44 253 105 108 130 25 170 184 173 99 
+106 235 191 49 124 38 23 236 164 110 249 139 109 33 16 234 
+232 230 30 98 94 174 86 9 224 93 37 226 119 116 188 100 
+84 54 195 200 221 17 82 63 12 244 210 70 207 79 81 237 
+183 111 181 154 46 57 59 252 26 87 208 223 107 65 132 165 
+150 113 89 218 62 112 177 134 129 125 20 102 22 233 143 227 
+199 3 153 155 95 190 168 76 206 55 53 187 56 213 90 157 
+47 58 80 138 74 50 48 202 225 178 158 229 251 29 247 42 
+101 10 172 35 104 163 254 152 92 209 169 193 151 121 128 2 
+194 69 83 120 1 205 214 123 215 142 32 156 85 88 211 118 
+5 219 15 18 238 220 148 160 131 64 217 140 175 201 66 39 
+14 171 127 68 196 231 248 117 136 255 19 21 147 162 11 133 
+dorian@dorian-G75VX:~/Documents/workspace c++/carre-magique$ ./main
+taille du carre magique : 17
+tours : 66 ; restart : 12
+temps de calcul de l'algo incomplet : 13.7917
+solution trouvé par l'algorithme incomplet :
+157 273 254 205 218 45 141 172 195 6 37 35 137 142 222 15 211 
+72 204 212 85 226 264 59 74 146 49 149 153 169 77 98 182 246 
+235 213 8 32 125 78 128 136 278 144 145 61 183 114 214 147 224 
+105 110 115 281 17 118 287 63 134 284 225 229 46 186 12 95 158 
+104 176 22 190 189 232 209 181 43 236 10 16 266 267 14 208 102 
+250 269 21 36 227 155 111 24 200 262 44 92 175 133 248 167 51 
+5 40 80 57 187 210 162 48 127 249 268 223 191 244 109 203 62 
+274 131 238 101 282 52 277 20 64 66 25 260 122 124 130 135 164 
+26 217 241 276 270 82 91 256 30 140 156 259 123 121 34 90 53 
+84 132 220 161 129 192 13 87 148 198 163 201 107 71 194 185 180 
+151 11 159 33 3 113 173 177 221 230 170 41 196 240 94 247 206 
+285 152 168 68 119 93 76 283 231 55 56 271 86 197 219 7 99 
+202 27 126 216 2 73 58 286 70 253 88 50 199 160 280 258 117 
+263 257 75 233 31 255 251 207 38 9 275 28 42 108 188 39 166 
+139 120 171 96 252 65 272 279 83 29 239 184 100 60 81 116 179 
+1 79 67 106 165 193 19 103 215 237 154 97 234 174 150 228 243 
+112 54 288 289 23 245 138 69 242 18 261 265 89 47 178 143 4 

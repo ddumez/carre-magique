@@ -301,10 +301,19 @@ void grille::perturbe() {
 					}
 					
 					while ((j2 < this->k) && (0 != score)) {
+						//on garde la permutation si elle est efficace
+						//calul partiel du score
+						if (this->nouveauscore(i1,j1,i2,j2,score) <= score) {
+							score = this->nouveauscore(i1,j1,i2,j2,score);
+							tmp = this->lagrille.at(i1).at(j1);
+							this->lagrille.at(i1).at(j1) = this->lagrille.at(i2).at(j2);
+							this->lagrille.at(i2).at(j2) = tmp;
+						}
+
+						/* calcul du score en entier a chaque fois
 						tmp = this->lagrille.at(i1).at(j1);
 						this->lagrille.at(i1).at(j1) = this->lagrille.at(i2).at(j2);
 						this->lagrille.at(i2).at(j2) = tmp;
-
 						//on garde la permutation si elle est efficace
 						if (this->score() <= score) {
 							score = this->score();
@@ -312,7 +321,8 @@ void grille::perturbe() {
 							tmp = this->lagrille.at(i2).at(j2);
 							this->lagrille.at(i2).at(j2) = this->lagrille.at(i1).at(j1);
 							this->lagrille.at(i1).at(j1) = tmp;
-						}
+						}*/
+						
 						++j2;
 					}
 					++i2;
@@ -327,19 +337,88 @@ void grille::perturbe() {
 int grille::nouveauscore(const int i1, const int j1, const int i2, const int j2, const int score) const {
 	//variable
 		int res = score;
+		int tmp = 0;
+		int i,j;
+		int nbmagique = this->nombremagique();
 	//debut
-		res = res - this->sumC(j1) - this->sumC(j2) - this->sumL(i1) - this->sumL(i2);
-		if (i1 == j1) {
-			res -= this->sumd1();
+		res = res - (int)pow( (double)(nbmagique - this->sumC(j1)) , 2.0) - (int)pow( (double)(nbmagique - this->sumC(j2)) , 2.0) - (int)pow( (double)(nbmagique - this->sumL(i1)) , 2.0) - 
+			(int)pow( (double)(nbmagique - this->sumL(i2)) , 2.0) - (int)pow( (double)(nbmagique - this->sumd1()) , 2.0) - (int)pow( (double)(nbmagique - this->sumd2()) , 2.0);
+
+		//on reajoute tout ce que l'on a enleve en inversant les deux cases
+		//reajout somme ligne	
+		i = i1;
+		for(j = 0; j< this->k; ++j) {
+			if(j1 == j) {
+				tmp += this->lagrille.at(i2).at(j2);
+			} else if ((j2 == j) && (i2 == i)) {
+				tmp += this->lagrille.at(i1).at(j1);			
+			} else { 
+				tmp += this->lagrille.at(i).at(j);
+			}
 		}
-		if(j1 == this->k - i1 + 1) {
-			res -= this->sumd2()
+		res +=  (int)pow( (double)(nbmagique - tmp) , 2.0);
+		i = i2; tmp = 0;
+		for(j = 0; j< this->k; ++j) {
+			if(j2 == j) {
+				tmp += this->lagrille.at(i1).at(j1);
+			} else if ((j1 == j) && (i1 == i)) {
+				tmp += this->lagrille.at(i2).at(j2);			
+			} else { 
+				tmp += this->lagrille.at(i).at(j);
+			}
 		}
-		if (i2 == j2) {
-			res -= this->sumd1();
+		res +=  (int)pow( (double)(nbmagique - tmp ), 2.0);
+
+		//reajout somme colonne
+		j = j1; tmp = 0;
+		for(i = 0; i< this->k; ++i) {
+			if (i1 == i) {
+				tmp += this->lagrille.at(i2).at(j2);
+			} else if ((j2 == j) && (i2 == i)) {
+				tmp += this->lagrille.at(i1).at(j1);
+			} else {
+				tmp += this->lagrille.at(i).at(j);
+			}
 		}
-		if(j2 == this->k - i2 + 1) {
-			res -= this->sumd2()
+		res +=  (int)pow( (double)(nbmagique - tmp) , 2.0);
+		j = j2; tmp = 0;
+		for(i = 0; i< this->k; ++i) {
+			if (i2 == i) {
+				tmp += this->lagrille.at(i1).at(j1);
+			} else if ((j1 == j) && (i1 == i)) {
+				tmp += this->lagrille.at(i2).at(j2);
+			} else {
+				tmp += this->lagrille.at(i).at(j);
+			}
 		}
+		res +=  (int)pow( (double)(nbmagique - tmp ), 2.0);
+
+		//reajout diagonale 1
+		tmp = 0;
+		for(i = 0; i< this->k; ++i) {
+			if ((i1 == i) && (j1 == i)) {
+				tmp += this->lagrille.at(i2).at(j2);	
+			} else if ((i2 == i) && (j2 == i)) {
+				tmp += this->lagrille.at(i1).at(j1);	
+			} else {
+				tmp += this->lagrille.at(i).at(i);
+			}
+		}
+		res +=  (int)pow( (double)(nbmagique - tmp ), 2.0);
+
+		//reajout diagonale 2
+		tmp = 0;
+		for(i = 0; i< this->k; ++i) {
+			if ((i1 == i) && (j1 == k-1-i)) {
+				tmp += this->lagrille.at(i2).at(j2);
+			} else if ((i2 == i) && (j2 == k-1-i)) {
+				tmp += this->lagrille.at(i1).at(j1);
+			} else {
+				tmp += this->lagrille.at(i).at(k-1-i);
+			}
+		}
+		res +=  (int)pow( (double)(nbmagique - tmp ), 2.0);
+
 	//fin
+	return res;
 }
