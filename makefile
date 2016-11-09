@@ -1,6 +1,6 @@
 CC = gpp
 SOURCES = ./grille.cpp ./incomplet.cpp ./complet.cpp ./variable.cpp ./carre.cpp
-CFLAGS = -Wall -O3
+CFLAGS = -Wall -g
 .PHONY = clean
 
 all: main

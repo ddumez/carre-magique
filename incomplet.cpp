@@ -45,6 +45,6 @@ grille * resolI(int k) {
 		}
 
 	//fin
-cout<<"tours : "<<tours<<" ; restart : "<<restart<<endl;
+//cout<<"tours : "<<tours<<" ; restart : "<<restart<<endl;
 return res;
 }

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "variable.hpp"
 
 #include <vector>
@@ -16,10 +18,10 @@ variable::~variable() {}
 
 void variable::initialise(const int k) {
 	this->val = 0;
-	
+
 	for(int i = 1; i<=k*k; ++i) {
 		this->restant.insert(i);
-	}	
+	}
 }
 
 void variable::choix(const int val) {
@@ -28,9 +30,9 @@ void variable::choix(const int val) {
 
 	for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 		if (val != *it) {
-			nouv.insert(*it);
+			nouv.insert(*it); //on copie les valeurs restantes (sauf celle utilise) pour l'historique
 		}
-		this->restant.erase(*it);
+		this->restant.erase(*it); //on vide l'ensemble des valeurs possible restante
 	}
 	this->historique.push_back(nouv);
 }
@@ -54,15 +56,15 @@ bool variable::estvide() const {
 }
 
 bool variable::resteun() const {
-	return ((0!= this->val) || (1 == this->restant.size()));
+	return ((0 != this->val) || (1 == this->restant.size()));
 }
 
 int variable::getval() const {
 	return this->val;
 }
 
-set<int> const * variable::getrestant() const {
-	return &(this->restant) ;
+const set<int> * const variable::getrestant() const {
+	return &(this->restant);
 }
 
 void variable::enleverval() {
@@ -72,7 +74,9 @@ void variable::enleverval() {
 void variable::annule() {
 	//on remet toute les variables filtre par le dernier assignement dans restant
 	for(set<int>::iterator it = historique.back().begin() ; it!=historique.back().end() ; ++it) {
+cout<<*it<<" ";
 		this->restant.insert(*it);
 	}
 	this->historique.pop_back();
+cout<<"\n";
 }
