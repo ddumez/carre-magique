@@ -1,5 +1,5 @@
 CC = gpp
-SOURCES = ./grille.cpp ./incomplet.cpp ./complet.cpp ./variable.cpp ./carre.cpp
+SOURCES = ./grille.cpp ./incomplet.cpp
 CFLAGS = -Wall -O3
 .PHONY = clean
 
