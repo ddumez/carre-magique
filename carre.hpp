@@ -43,6 +43,17 @@ class carre {
 		~carre();
 
 	//methodes
+
+		/**
+		* \brief retourne le nombre magique de cette grille
+		*/
+		int nombremagique() const;
+
+		/**
+		* \brief retourne la taille du carre magique
+		*/
+		int gettaille() const;
+
 		/**
 		* \brief affiche la valeurs des variable de ce carre dans la sortie standard
 		*/
@@ -56,6 +67,15 @@ class carre {
 		* \param[in] j la deuxieme coordonne de la case
 		*/
 		void choisir(const int val, const int i, const int j);
+
+		/**
+		* \brief renvoi l'ensemble des valeurs restantes possible pour la case (i,j)
+		*
+		* \param[in] i le premier indice de la case
+		* \param[in] j le second indice de la case
+		* \return l'ensemble des valeurs restantes pour cette case
+		*/
+		const set<int> * const getrestant(const int i, const int j);
 
 		/**
 		* \brief annule le dernier assignement de variable

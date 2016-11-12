@@ -9,9 +9,9 @@
 #include <vector>
 
 #include "grille.hpp"
-//#include "variable.hpp"
-//#include "carre.hpp"
-//#include "complet.hpp"
+#include "variable.hpp"
+#include "carre.hpp"
+#include "complet.hpp"
 #include "incomplet.hpp"
 
 using namespace std;
@@ -19,7 +19,7 @@ using namespace std;
 int main() {
 	//variable
 		int k; //taille du carré magique
-		//carre * soluceC; //solution trouvé par l'algorithme complet
+		carre * soluceC; //solution trouvé par l'algorithme complet
 		grille * soluceI; //solution trouvé par l'algorithme incomplet
 		clock_t tc, ti, totc, toti;
 	//début
@@ -29,20 +29,21 @@ int main() {
 
 		//calculs
 		tc = clock();
-		//soluceC = resolC(k);
+		soluceC = resolC(k);
 		tc = clock() - tc;
 		ti = clock();
 		soluceI = resolI(k);
 		ti = clock() - ti;
 
 		//sorties
-		//cout<<"temps de calcul de l'algo complet : "<<(double)((double)tc/(double)(CLOCKS_PER_SEC))<<endl;"
-		//cout<<"solution trouvé par l'algorithme complet :"<<endl;
-		//soluceC->affiche();
+		cout<<"temps de calcul de l'algo complet : "<<(double)((double)tc/(double)(CLOCKS_PER_SEC))<<endl;
+		cout<<"solution trouvé par l'algorithme complet :"<<endl;
+		soluceC->affiche();
 		
 		cout<<"temps de calcul de l'algo incomplet : "<<(double)((double)ti/(double)(CLOCKS_PER_SEC))<<endl;
 		cout<<"solution trouvé par l'algorithme incomplet :"<<endl;
 		soluceI->affiche();
+
 		/*
 		toti = 0;
 		for(int i = 0; i<10; ++i) {
@@ -54,7 +55,7 @@ int main() {
 		cout<<"temps moyen de calcul (10 iterations) pour l'algo incomplet : "<<(double)((double)toti/(double)(CLOCKS_PER_SEC*10))<<endl;
 		*/
 	//fin
-	//delete(soluceC);
+	delete(soluceC);
 	delete(soluceI);
 return 0;
 }

@@ -1,6 +1,6 @@
 CC = gpp
-SOURCES = ./grille.cpp ./incomplet.cpp
-CFLAGS = -Wall -O3
+SOURCES = ./grille.cpp ./incomplet.cpp ./complet.cpp ./variable.cpp ./carre.cpp
+CFLAGS = -Wall -g
 .PHONY = clean
 
 all: main
@@ -8,4 +8,4 @@ all: main
 main: $(SOURCES:.cpp=.o)
 
 clean: 
-	rm ./*.o
+rm ./*.o

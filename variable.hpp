@@ -94,7 +94,7 @@ class variable {
 		*
 		* \return une reference vers l'ensemble des valeurs restantes
 		*/
-		set<int> const * getrestant() const;
+		const set<int> * const getrestant() const;
 
 		/**
 		* \brief enleve la veleur de cette variable (la remet a 0)
