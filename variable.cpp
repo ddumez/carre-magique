@@ -29,9 +29,7 @@ void variable::choix(const int val) {
 	set<int> nouv;
 
 	for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
-		if (val != *it) {
-			nouv.insert(*it); //on copie les valeurs restantes (sauf celle utilise) pour l'historique
-		}
+		nouv.insert(*it); //on copie les valeurs restantes (sauf celle utilise) pour l'historique
 		this->restant.erase(*it); //on vide l'ensemble des valeurs possible restante
 	}
 	this->historique.push_back(nouv);

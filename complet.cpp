@@ -14,18 +14,18 @@ carre * resolC(int k) {
 }
 
 bool resolCRec(carre * sol, const int i, const int j) {
-cout<<"\n resolCRec : i = "<<i<<" j = "<<j<<endl;
-sol->affiche();
-cout<<"domaine restant : ";
-for(set<int>::iterator it = sol->getrestant(i,j)->begin() ; it!=sol->getrestant(i,j)->end() ; ++it) {
-	cout<<*it<<" ";
-}
-cout<<"\n"<<endl;
-
-
 	if (sol->gettaille() == i) { //cas de base
-		return true;
+		return true; //c'est que l'on a incrementé aprè avoir fixé la dernière variable, donc qu'elles sont toutes fixe
 	} else {
+		cout<<"\n resolCRec : i = "<<i<<" j = "<<j<<endl;
+		sol->affiche();
+		cout<<"domaine restant : ";
+		for(set<int>::iterator it = sol->getrestant(i,j)->begin() ; it!=sol->getrestant(i,j)->end() ; ++it) {
+			cout<<*it<<" ";
+		}
+		cout<<"\n"<<endl;
+
+
 		//variable
 		const set<int> restant (* sol->getrestant(i,j));
 		const int nbmagique = sol->nombremagique();
@@ -37,6 +37,8 @@ cout<<"\n"<<endl;
 		//debut
 			for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 				sol->choisir(*it, i, j);
+cout<<"choix de : "<<*it<<endl;
+sol->affiche();
 cout<<"domaine restant : ";
 for(set<int>::iterator it2 = restant.begin() ; it2!=restant.end() ; ++it2) {
 	cout<<*it2<<" ";

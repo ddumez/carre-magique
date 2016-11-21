@@ -8,4 +8,4 @@ all: main
 main: $(SOURCES:.cpp=.o)
 
 clean: 
-rm ./*.o
+	rm ./*.o
