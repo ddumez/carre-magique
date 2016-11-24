@@ -21,6 +21,8 @@ class variable {
 			int val; /*!<la valeur de la variable si celle ci est fixé, 0 sinon */
 			set<int> restant; /*!<ensemble des valeures possibles restantes*/
 			vector< set<int> > historique; /*!<historique des valeure enleve a restant par les dernier choix*/
+			int posi; /*!<premier indice de la position de cette variable dans le carre*/
+			int posj; /*!<deuxieme indice de la position de cette variable dans le carre*/
 
 		public:
 	//constructeur
@@ -33,8 +35,10 @@ class variable {
 		* \brief construit une variable sans valeur avec comme valeur possible tout les nombre de 1 a k*k
 		*
 		* \param[in] k la taille de la grille a laquele apartien la variable
+		* \param[in] i premier indice de la position de cette variable dans le carre
+		* \param[in] j deuxieme indice de la position de cette variable dans le carre
 		*/
-		variable(const int k);
+		variable(const int k, const int i, const int j);
 
 	//deconstructeur
 		~variable();
@@ -44,8 +48,24 @@ class variable {
 		* \brief initialise une variable comme le ferai le constructeur avec parametre
 		*
 		* \param[in] k la taille du carre auquel apartien la variable
+		* \param[in] i premier indice de la position de cette variable dans le carre
+		* \param[in] j deuxieme indice de la position de cette variable dans le carre
 		*/
-		void initialise(const int k);
+		void initialise(const int k, const int i, const int j);
+
+		/**
+		* \brief donne le premier indice de la position de cette variable
+		*
+		* \return le premier indice de la position de cette variable
+		*/
+		int getposi();
+
+		/**
+		* \brief donne le deuxieme indice de la position de cette variable
+		*
+		* \return le deuxieme indice de la position de cette variable
+		*/
+		int getposj();
 
 		/**
 		* \brief choisis une valeure de la variable
@@ -105,6 +125,13 @@ class variable {
 		* \brief annule le dernier filtrage
 		*/
 		void annule();
+
+		/**
+		* \brief redifinition de l'operateur de comparaison
+		*
+		* \return vrai si le domaine de lhs est plus petit que celui de rhs
+		*/
+		inline bool operator< (const variable & rhs){ return this->restant.size() < rhs.restant.size(); }
 
 };
 

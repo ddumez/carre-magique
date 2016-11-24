@@ -1,4 +1,7 @@
 #include <iostream>
+#include <functional>
+#include <queue>
+#include <vector>
 using namespace std;
 
 #include "grille.hpp"
@@ -7,62 +10,56 @@ using namespace std;
 carre * resolC(int k) {
 	//variable
 		carre * sol = new carre(k);
+		priority_queue_variable afaire;
 	//début
-		cout<<"trouvé : "<<resolCRec(sol, 0, 0)<<endl;
+		//initialisation de la file de priorite
+		for(int i=0; i<sol->gettaille(); ++i) {
+			for(int j=0; j<sol->gettaille(); ++j) {
+				afaire.push(sol->getvar(i,j));
+			}
+		}
+		//lancement de la recherche
+		cout<<"trouvé : "<<resolCRec(sol, &afaire)<<endl;
 	//fin
 	return sol;
 }
 
-bool resolCRec(carre * sol, const int i, const int j) {
-	if (sol->gettaille() == i) { //cas de base
-		return true; //c'est que l'on a incrementé aprè avoir fixé la dernière variable, donc qu'elles sont toutes fixe
+bool resolCRec(carre * sol, priority_queue_variable * afaire) {
+	if (afaire->empty()) { //cas de base
+		return true; //on a plus de variable a traite donc elles ont toute une valeur
 	} else {
-		cout<<"\n resolCRec : i = "<<i<<" j = "<<j<<endl;
-		sol->affiche();
-		cout<<"domaine restant : ";
-		for(set<int>::iterator it = sol->getrestant(i,j)->begin() ; it!=sol->getrestant(i,j)->end() ; ++it) {
-			cout<<*it<<" ";
-		}
-		cout<<"\n"<<endl;
-
-
 		//variable
-		const set<int> restant (* sol->getrestant(i,j));
+		variable * courant = afaire->top();
+		const set<int> restant (* courant->getrestant());
 		const int nbmagique = sol->nombremagique();
 		bool flag;
-		const int nexti = i + (int)((j+1)/sol->gettaille());
-		const int nextj = (j+1) % sol->gettaille();
-
+		const int i = courant->getposi();
+		const int j = courant->getposj();
+		afaire->pop(); //on enleve courant des variables a traiter
 
 		//debut
 			for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 				sol->choisir(*it, i, j);
-cout<<"choix de : "<<*it<<endl;
-sol->affiche();
-cout<<"domaine restant : ";
-for(set<int>::iterator it2 = restant.begin() ; it2!=restant.end() ; ++it2) {
-	cout<<*it2<<" ";
-}
-cout<<" : ";
 				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique) && !sol->culdesac()) {
 					//la solution reste admissible
-					//on passe à la variable suivante
-cout<<"valeur choisie : "<<*it<<" en ("<<i<<","<<j<<")"<<endl;					
-					flag = resolCRec(sol, nexti, nextj);
+					//on passe à la variable suivante				
+					flag = resolCRec(sol, afaire);
 				} else {
-cout<<"valeur abandonne : "<<*it<<" en ("<<i<<","<<j<<") :"<<endl;
 					flag = false;
 				}
 				
 				if (! flag) {
 					sol->annuler();
 				} else {
-cout<<"trouve"<<endl;
-					return true;
+					if ((sol->suml(i) == nbmagique) && (sol->sumc(j) == nbmagique) && (sol->sumd1() == nbmagique) && (sol->sumd2() == nbmagique)) {
+						return true;
+					} else {
+						sol->annuler();
+					}
 				}
 			}
 		//fin
-cout<<"retour"<<endl;
+		afaire->push(courant); //on n'a pas reussis a la fixer donc il faudra la re-considerer
 		return false;
 	}
 }

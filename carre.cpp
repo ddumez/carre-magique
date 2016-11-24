@@ -15,7 +15,7 @@ carre::carre(const int k) {
 	for(int i = 0; i<k; ++i) {
 		this->grille.at(i).resize(k);
 		for(int j = 0; j<k; ++j) {
-			this->grille.at(i).at(j).initialise(k);
+			this->grille.at(i).at(j).initialise(k,i,j);
 		}
 	}
 }
@@ -37,6 +37,10 @@ void carre::affiche() const {
 		}
 		cout<<"\n";
 	}
+}
+
+variable * carre::getvar(const int i, const int j) {
+	return & this->grille.at(i).at(j);
 }
 
 void carre::choisir(const int val, const int i, const int j) {
@@ -62,7 +66,6 @@ void carre::annuler() {
 	
 	for(int i = 0; i<this->k; ++i) {
 		for(int j = 0; j<this->k; ++j) {
-cout<<"annule ("<<i<<","<<j<<") : ";
 			this->grille.at(i).at(j).annule();
 		}
 	}
@@ -97,7 +100,15 @@ bool carre::culdesac() const {
 		}
 		++i;
 	}
-	if (res) {cout<<"(erreur sur ("<<--i<<","<<--j<<") ) ";}
+
+	//on teste les symetries si les variables consideré on ete assigne
+	//cassage de symetriedroite/gauche : constraint c[1,1] > c[1,n]
+	res = res || ( ( grille.at(0).at(0).getval() <= grille.at(0).at(this->k-1).getval() ) && (0 != grille.at(0).at(0).getval()) && (0 != grille.at(0).at(this->k-1).getval()) );
+	//cassage de symetrie haut/bas : constraint c[1,n] > c[n,1]
+	res = res || ( ( grille.at(0).at(this->k-1).getval() <= grille.at(this->k-1).at(0).getval() ) && (0 != grille.at(0).at(this->k-1).getval()) && (0 != grille.at(this->k-1).at(0).getval()) );
+	//cassage de symetrie diagonale 1 : constraint c[1,1] > c[n,n]
+	res = res || ( ( grille.at(0).at(0).getval() <= grille.at(this->k-1).at(this->k-1).getval() ) && (0 != grille.at(0).at(0).getval()) && (grille.at(this->k-1).at(this->k-1).getval()) );
+
 	return res;
 }
 
@@ -106,7 +117,6 @@ int carre::suml(const int i) const {
 	for(int j = 0; j<k; ++j) {
 		res += this->grille.at(i).at(j).getval();
 	}
-if (res > this->nombremagique()) {cout<<"(erreur soml = "<<res<<") ";}
 	return res;
 }
 
@@ -115,7 +125,6 @@ int carre::sumc(const int j) const {
 	for(int i = 0; i<k; ++i) {
 		res += this->grille.at(i).at(j).getval();
 	}
-if (res > this->nombremagique()) {cout<<"(erreur somc = "<<res<<") ";}
 	return res;
 }
 
@@ -124,7 +133,6 @@ int carre::sumd1() const {
 	for(int i = 0; i<k; ++i) {
 		res += this->grille.at(i).at(i).getval();
 	}
-if (res > this->nombremagique()) {cout<<"(erreur somd1 = "<<res<<") ";}
 	return res;
 }
 
@@ -133,7 +141,6 @@ int carre::sumd2() const {
 	for(int i = 0; i<k; ++i) {
 		res += this->grille.at(i).at(this->k - i -1).getval();
 	}
-if (res > this->nombremagique()) {cout<<"(erreur somd2 = "<<res<<") ";}
 	return res;
 }
 

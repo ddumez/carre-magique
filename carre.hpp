@@ -60,6 +60,15 @@ class carre {
 		void affiche() const;
 
 		/**
+		* \brief renvoir un pointeur vers la variable demande
+		*
+		* \param[in] i le premier indice de la variable
+		* \param[in] j le deuxieme indice de la variable
+		* \return un pointeur sur la variable situe a la case (i,j)
+		*/
+		variable * getvar(const int i, const int j);
+
+		/**
 		* \brief assigne la valeur val a la case (i,j)
 		*
 		* \param[in] val la valeur a assigner
@@ -90,9 +99,9 @@ class carre {
 		bool fini() const;
 
 		/**
-		* \brief calcule si cette solution est impossible
+		* \brief calcule si cette solution est impossible et casse les symetries
 		*
-		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur
+		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur ou on est dans un cas symetrique
 		*/ 
 		bool culdesac() const;
 

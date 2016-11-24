@@ -10,19 +10,25 @@ using namespace std;
 
 variable::variable() {}
 
-variable::variable(const int k) {
-	this->initialise(k);
+variable::variable(const int k, const int i, const int j) {
+	this->initialise(k, i, j);
 }
 
 variable::~variable() {}
 
-void variable::initialise(const int k) {
+void variable::initialise(const int k, const int i, const int j) {
 	this->val = 0;
+	this->posi = i;
+	this->posj = j;
 
 	for(int i = 1; i<=k*k; ++i) {
 		this->restant.insert(i);
 	}
 }
+
+int variable::getposi() {return this->posi;}
+
+int variable::getposj() {return this->posj;}
 
 void variable::choix(const int val) {
 	this->val = val;
@@ -72,9 +78,7 @@ void variable::enleverval() {
 void variable::annule() {
 	//on remet toute les variables filtre par le dernier assignement dans restant
 	for(set<int>::iterator it = historique.back().begin() ; it!=historique.back().end() ; ++it) {
-cout<<*it<<" ";
 		this->restant.insert(*it);
 	}
 	this->historique.pop_back();
-cout<<"\n";
 }
