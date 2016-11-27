@@ -40,10 +40,16 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 		//debut
 			for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 				sol->choisir(*it, i, j);
-				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique) && !sol->culdesac()) {
+				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique)) {
 					//la solution reste admissible
-					//on passe à la variable suivante				
-					flag = resolCRec(sol, afaire);
+					sol->filterligne(i);
+					sol->filtercolonne(j);
+					if ( !sol->culdesac() ){
+						//on passe à la variable suivante		
+						flag = resolCRec(sol, afaire);
+					} else {
+						flag = false;
+					}
 				} else {
 					flag = false;
 				}

@@ -78,6 +78,16 @@ class carre {
 		void choisir(const int val, const int i, const int j);
 
 		/**
+		* \brief filtre les valeur possible sur une ligne apres une affectation sur celle ci
+		*/
+		void filterligne(const int i);
+
+		/**
+		* \brief filtre les valeur possible sur une colonne apres une affectation sur celle ci
+		*/
+		void filtercolonne(const int j);
+
+		/**
 		* \brief renvoi l'ensemble des valeurs restantes possible pour la case (i,j)
 		*
 		* \param[in] i le premier indice de la case

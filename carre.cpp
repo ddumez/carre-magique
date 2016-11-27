@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <algorithm>
+#include <math.h>
 
 using namespace std;
 
@@ -55,6 +57,120 @@ void carre::choisir(const int val, const int i, const int j) {
 	}
 	couple nouv; nouv.i = i; nouv.j = j;
 	this->historique.push_back(nouv);
+}
+
+void carre::filterligne(const int i) {
+	if (! this->allassignligne(i)) {
+		const int sum = this->suml(i); //on calule la somme actuelle de la ligne
+		int tmp;
+		int minval, maxval; //valeur etremes autorises
+		int min = this->k * this->k; //plus petites valeurs des domaines
+		int max = 0; //plus grandes valeurs des domaines
+		vector<int> afixer; //indice des cases qu'il reste a fixer
+		set<int> * resteij;
+
+		//recherche du min et du max
+		for(int j=0; j<this->k; ++j) { //pour toute les variables
+			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
+				if( (tmp = *min_element(this->grille.at(i).at(j).getrestant().begin(),this->grille.at(i).at(j).getrestant().end())) < min ) {
+					min = tmp;
+				}
+				if( (tmp = *max_element(this->grille.at(i).at(j).getrestant().begin(),this->grille.at(i).at(j).getrestant().end())) > max ) {
+					max = tmp;
+				}
+				afixer.push(j);
+			}
+		}
+
+		if (afixer.size() > 1) {
+			//calcul des valeur extreme autorise
+			minval = this->nombremagique() - sum;
+			maxval = this->nombremagique() - sum;
+			for(int parc = afixer.size()-2; parc >= 0; --parc) {
+				minval -= (max - parc); //ce qu'il reste si il prennent tous leur plus grande valeur
+				maxval -= (min + parc); //ce qu'il reste si il prennent tous leur plus petites valeur
+			}
+			//on filtre les valeurs non autorise
+			for(int j : afixer) {
+				resteij = set<int>(* this->grille.at(i).at(j).getrestant());
+				for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+					if ( (*it < minval) || (*it > maxval) ){
+						this.grille.at(i).at(j).enlever(*it);
+					}
+				}
+			}
+		} else { //il y a exactement un element a fixer
+			//il n'a qu'une seule valeur possible
+			//calcul des valeur extreme autorise
+			minval = this->nombremagique() - sum;
+
+			//on filtre les valeurs non autorise
+			j = afixer.get(0);
+			resteij = set<int>(* this->grille.at(i).at(j).getrestant());
+			for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+				if ( *it != minval ){
+					this.grille.at(i).at(j).enlever(*it);
+				}
+			}
+		}
+	}
+}
+
+void carre::filtercolonne(const int j) {
+		if (! this->allasigncolone(j)) {
+		const int sum = this->sumc(j); //on calule la somme actuelle de la colonne
+		int tmp;
+		int minval, maxval; //valeur etremes autorises
+		int min = this->k * this->k; //plus petites valeurs des domaines
+		int max = 0; //plus grandes valeurs des domaines
+		vector<int> afixer; //indice des cases qu'il reste a fixer
+		set<int> * resteij;
+
+		//recherche du min et du max
+		for(int i=0; i<this->k; ++i) { //pour toute les variables
+			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
+				if( (tmp = *min_element(this->grille.at(i).at(j).getrestant().begin(),this->grille.at(i).at(j).getrestant().end())) < min ) {
+					min = tmp;
+				}
+				if( (tmp = *max_element(this->grille.at(i).at(j).getrestant().begin(),this->grille.at(i).at(j).getrestant().end())) > max ) {
+					max = tmp;
+				}
+				afixer.push(i);
+			}
+		}
+
+		if (afixer.size() > 1) {
+			//calcul des valeur extreme autorise
+			minval = this->nombremagique() - sum;
+			maxval = this->nombremagique() - sum;
+			for(int parc = afixer.size()-2; parc >= 0; --parc) {
+				minval -= (max - parc); //ce qu'il reste si il prennent tous leur plus grande valeur
+				maxval -= (min + parc); //ce qu'il reste si il prennent tous leur plus petites valeur
+			}
+			//on filtre les valeurs non autorise
+			for(int i : afixer) {
+				resteij = set<int>(* this->grille.at(i).at(j).getrestant());
+				for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+					if ( (*it < minval) || (*it > maxval) ){
+						this.grille.at(i).at(j).enlever(*it);
+					}
+				}
+			}
+		} else { //il y a exactement un element a fixer
+			//il n'a qu'une seule valeur possible
+			//calcul des valeur extreme autorise
+			minval = this->nombremagique() - sum;
+
+			//on filtre les valeurs non autorise
+			i = afixer.get(0);
+			resteij = set<int>(* this->grille.at(i).at(j).getrestant());
+			for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+				if ( *it != minval ){
+					this.grille.at(i).at(j).enlever(*it);
+				}
+			}
+		}
+	}
 }
 
 const set<int> * const carre::getrestant(const int i, const int j) {
