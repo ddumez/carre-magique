@@ -18,6 +18,12 @@ carre * resolC(int k) {
 				afaire.push(sol->getvar(i,j));
 			}
 		}
+		//prefiltrage
+		for(int i=0; i<sol->gettaille(); ++i) {
+			sol->filtrerligne(i);
+			sol->filtrercolonne(i);
+		}
+		sol->filtrersymetrie();
 		//lancement de la recherche
 		cout<<"trouvé : "<<resolCRec(sol, &afaire)<<endl;
 	//fin
@@ -47,8 +53,8 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 					sol->filtrersymetrie();
 					if ( !sol->culdesac() ){
 						//on passe à la variable suivante
-//sol->affiche();
-//cout<<"\n"<<endl;
+sol->affiche();
+cout<<"\n"<<endl;
 
 						flag = resolCRec(sol, afaire);
 					} else {
