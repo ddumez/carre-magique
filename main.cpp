@@ -21,7 +21,7 @@ int main() {
 		int k; //taille du carré magique
 		carre * soluceC; //solution trouvé par l'algorithme complet
 		grille * soluceI; //solution trouvé par l'algorithme incomplet
-		clock_t tc, ti, totc, toti;
+		clock_t tc, ti, toti;
 	//début
 		//entrées
 		cout<<"taille du carre magique : ";

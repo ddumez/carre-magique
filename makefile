@@ -1,6 +1,7 @@
-CC = gpp
+CXX = g++
 SOURCES = ./grille.cpp ./incomplet.cpp ./complet.cpp ./variable.cpp ./carre.cpp
-CFLAGS = -Wall -O3
+CPPFLAGS = -Wall -O3
+CXXFLAGS := -std=c++11
 .PHONY = clean
 
 all: main

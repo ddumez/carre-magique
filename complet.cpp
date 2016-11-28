@@ -42,10 +42,14 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 				sol->choisir(*it, i, j);
 				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique)) {
 					//la solution reste admissible
-					sol->filterligne(i);
-					sol->filtercolonne(j);
+					sol->filtrerligne(i);
+					sol->filtrercolonne(j);
+					sol->filtrersymetrie();
 					if ( !sol->culdesac() ){
-						//on passe à la variable suivante		
+						//on passe à la variable suivante
+//sol->affiche();
+//cout<<"\n"<<endl;
+
 						flag = resolCRec(sol, afaire);
 					} else {
 						flag = false;

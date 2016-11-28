@@ -79,13 +79,25 @@ class carre {
 
 		/**
 		* \brief filtre les valeur possible sur une ligne apres une affectation sur celle ci
+		* si une variable est filtre sa colone le sera
+		*
+		* \param[in] i la ligne a filtrer
 		*/
-		void filterligne(const int i);
+		void filtrerligne(const int i);
 
 		/**
 		* \brief filtre les valeur possible sur une colonne apres une affectation sur celle ci
+		* si une variable est filtre sa ligne le sera
+		*
+		* \param[in] j la colone a filtrer
 		*/
-		void filtercolonne(const int j);
+		void filtrercolonne(const int j);
+
+		/**
+		* \brief filtre le valeur possible des varible des coin pour eviter les symetries
+		* si une variable est filtre sa ligne et sa colone le seront
+		*/
+		void filtrersymetrie();
 
 		/**
 		* \brief renvoi l'ensemble des valeurs restantes possible pour la case (i,j)
