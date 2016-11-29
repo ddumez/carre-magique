@@ -30,6 +30,7 @@ for(int i = 0; i<sol->gettaille(); ++i) {
 		cout<<endl;
 	}
 }
+cout<<"\n"<<endl;
 
 		//lancement de la recherche
 		cout<<"trouvé : "<<resolCRec(sol, &afaire)<<endl;
@@ -53,16 +54,27 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 		//debut
 			for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 				sol->choisir(*it, i, j);
+//cout<<*it<<" choisis en "<<i<<" "<<j<<endl;
 				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique)) {
 					//la solution reste admissible
 					sol->filtrerligne(i);
 					sol->filtrercolonne(j);
 					sol->filtrersymetrie();
+/*
+for(int ii = 0; ii<sol->gettaille(); ++ii) {
+	for(int jj = 0; jj<sol->gettaille(); ++jj) {
+		cout<<ii<<" ; "<<jj<<" : ";
+		for (int parc : * sol->getvar(ii,jj)->getrestant()) {
+			cout<<parc<<" ";
+		}
+		cout<<endl;
+	}
+}
+sol->affiche();
+cout<<"\n"<<endl;
+*/
 					if ( !sol->culdesac() ){
 						//on passe à la variable suivante
-//sol->affiche();
-//cout<<"\n"<<endl;
-
 						flag = resolCRec(sol, afaire);
 					} else {
 						flag = false;
@@ -73,11 +85,37 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 				
 				if (! flag) {
 					sol->annuler();
+/*
+cout<<"annule"<<endl;
+for(int ii = 0; ii<sol->gettaille(); ++ii) {
+	for(int jj = 0; jj<sol->gettaille(); ++jj) {
+		cout<<ii<<" ; "<<jj<<" : ";
+		for (int parc : * sol->getvar(ii,jj)->getrestant()) {
+			cout<<parc<<" ";
+		}
+		cout<<endl;
+	}
+}
+cout<<"\n"<<endl;
+*/
 				} else {
 					if ((sol->suml(i) == nbmagique) && (sol->sumc(j) == nbmagique) && (sol->sumd1() == nbmagique) && (sol->sumd2() == nbmagique)) {
 						return true;
 					} else {
 						sol->annuler();
+/*
+cout<<"mauvaise solution"<<endl;
+for(int ii = 0; ii<sol->gettaille(); ++ii) {
+	for(int jj = 0; jj<sol->gettaille(); ++jj) {
+		cout<<ii<<" ; "<<jj<<" : ";
+		for (int parc : * sol->getvar(ii,jj)->getrestant()) {
+			cout<<parc<<" ";
+		}
+		cout<<endl;
+	}
+}
+cout<<"\n"<<endl;
+*/
 					}
 				}
 			}

@@ -189,7 +189,7 @@ void carre::filtrersymetrie() {
 		}
 		if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(this->k-1);}
 	}
-
+/*
 	//filtrage de c[n,n]
 	if (0 == this->grille.at(this->k-1).at(this->k-1).getval()) {
 		//pour c[1,1] > c[n,n];
@@ -208,7 +208,7 @@ void carre::filtrersymetrie() {
 		}
 		if (0 != compt) {this->filtrerligne(this->k-1); this->filtrercolonne(this->k-1);}
 	}
-
+*/
 	//filtrage de c[n,1]
 	if (0 == this->grille.at(this->k-1).at(0).getval()) {
 		//pour c[1,n] > c[n,1]
