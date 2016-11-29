@@ -7,11 +7,11 @@
 #include <queue>
 #include <vector>
 
-#include "variable.hpp"
-#include "carre.hpp"
-
 #ifndef COMPLET
 #define COMPLET
+
+#include "variable.hpp"
+#include "carre.hpp"
 
 /**
 * \brief operateur pour comparer les variables * dans la file de priorite
@@ -29,6 +29,7 @@ class mycomparison {
 * \brief file de priorite pour prendre les variable en fonction de la taille du domaine restant
 */
 typedef std::priority_queue<variable *,std::vector<variable *>,mycomparison> priority_queue_variable;
+
 
 /**
 * \brief retroune un carre magique normal de taille k remplit

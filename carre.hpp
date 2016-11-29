@@ -121,9 +121,9 @@ class carre {
 		bool fini() const;
 
 		/**
-		* \brief calcule si cette solution est impossible et casse les symetries
+		* \brief calcule si cette solution est impossible
 		*
-		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur ou on est dans un cas symetrique
+		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur
 		*/ 
 		bool culdesac() const;
 

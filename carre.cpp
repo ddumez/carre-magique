@@ -189,11 +189,11 @@ void carre::filtrersymetrie() {
 		}
 		if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(this->k-1);}
 	}
-/*
+
 	//filtrage de c[n,n]
 	if (0 == this->grille.at(this->k-1).at(this->k-1).getval()) {
 		//pour c[1,1] > c[n,n];
-		//borne1 = *max_element(this->grille.at(0).at(0).getrestant()->begin(),this->grille.at(0).at(0).getrestant()->end()); //la borne 1 ne change pas
+		borne1 = (0 == this->grille.at(0).at(0).getval()) ? *max_element(this->grille.at(0).at(0).getrestant()->begin(),this->grille.at(0).at(0).getrestant()->end()) : this->grille.at(0).at(0).getval();
 		//domaine de c[n,n]
 		reste = set<int>(* this->grille.at(this->k-1).at(this->k-1).getrestant());
 
@@ -208,7 +208,7 @@ void carre::filtrersymetrie() {
 		}
 		if (0 != compt) {this->filtrerligne(this->k-1); this->filtrercolonne(this->k-1);}
 	}
-*/
+
 	//filtrage de c[n,1]
 	if (0 == this->grille.at(this->k-1).at(0).getval()) {
 		//pour c[1,n] > c[n,1]
@@ -272,14 +272,6 @@ bool carre::culdesac() const {
 		}
 		++i;
 	}
-
-	//on teste les symetries si les variables consideré on ete assigne
-	//cassage de symetriedroite/gauche : constraint c[1,1] > c[1,n]
-	res = res || ( ( grille.at(0).at(0).getval() <= grille.at(0).at(this->k-1).getval() ) && (0 != grille.at(0).at(0).getval()) && (0 != grille.at(0).at(this->k-1).getval()) );
-	//cassage de symetrie haut/bas : constraint c[1,n] > c[n,1]
-	res = res || ( ( grille.at(0).at(this->k-1).getval() <= grille.at(this->k-1).at(0).getval() ) && (0 != grille.at(0).at(this->k-1).getval()) && (0 != grille.at(this->k-1).at(0).getval()) );
-	//cassage de symetrie diagonale 1 : constraint c[1,1] > c[n,n]
-	res = res || ( ( grille.at(0).at(0).getval() <= grille.at(this->k-1).at(this->k-1).getval() ) && (0 != grille.at(0).at(0).getval()) && (grille.at(this->k-1).at(this->k-1).getval()) );
 
 	return res;
 }

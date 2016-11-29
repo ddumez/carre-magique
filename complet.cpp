@@ -19,7 +19,7 @@ carre * resolC(int k) {
 			}
 		}
 		//prefiltrage
-		sol->filtrersymetrie();
+		if (1 != k) sol->filtrersymetrie();
 
 for(int i = 0; i<sol->gettaille(); ++i) {
 	for(int j = 0; j<sol->gettaille(); ++j) {
@@ -54,13 +54,13 @@ bool resolCRec(carre * sol, priority_queue_variable * afaire) {
 		//debut
 			for(set<int>::iterator it = restant.begin() ; it!=restant.end() ; ++it) {
 				sol->choisir(*it, i, j);
-//cout<<*it<<" choisis en "<<i<<" "<<j<<endl;
+cout<<*it<<" choisis en "<<i<<" "<<j<<endl;
 				if ((sol->suml(i) <= nbmagique) && (sol->sumc(j) <= nbmagique) && (sol->sumd1() <= nbmagique) && (sol->sumd2() <= nbmagique)) {
 					//la solution reste admissible
 					sol->filtrerligne(i);
 					sol->filtrercolonne(j);
 					sol->filtrersymetrie();
-/*
+
 for(int ii = 0; ii<sol->gettaille(); ++ii) {
 	for(int jj = 0; jj<sol->gettaille(); ++jj) {
 		cout<<ii<<" ; "<<jj<<" : ";
@@ -72,7 +72,7 @@ for(int ii = 0; ii<sol->gettaille(); ++ii) {
 }
 sol->affiche();
 cout<<"\n"<<endl;
-*/
+
 					if ( !sol->culdesac() ){
 						//on passe à la variable suivante
 						flag = resolCRec(sol, afaire);
@@ -84,8 +84,8 @@ cout<<"\n"<<endl;
 				}
 				
 				if (! flag) {
+					
 					sol->annuler();
-/*
 cout<<"annule"<<endl;
 for(int ii = 0; ii<sol->gettaille(); ++ii) {
 	for(int jj = 0; jj<sol->gettaille(); ++jj) {
@@ -97,13 +97,13 @@ for(int ii = 0; ii<sol->gettaille(); ++ii) {
 	}
 }
 cout<<"\n"<<endl;
-*/
+
 				} else {
 					if ((sol->suml(i) == nbmagique) && (sol->sumc(j) == nbmagique) && (sol->sumd1() == nbmagique) && (sol->sumd2() == nbmagique)) {
 						return true;
 					} else {
 						sol->annuler();
-/*
+
 cout<<"mauvaise solution"<<endl;
 for(int ii = 0; ii<sol->gettaille(); ++ii) {
 	for(int jj = 0; jj<sol->gettaille(); ++jj) {
@@ -115,7 +115,7 @@ for(int ii = 0; ii<sol->gettaille(); ++ii) {
 	}
 }
 cout<<"\n"<<endl;
-*/
+
 					}
 				}
 			}
