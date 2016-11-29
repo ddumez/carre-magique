@@ -64,18 +64,19 @@ void carre::filtrerligne(const int i) {
 		const int sum = this->suml(i); //on calule la somme actuelle de la ligne
 		int tmp, j;
 		int minval, maxval; //valeur etremes autorises
-		int min = this->k * this->k; //plus petites valeurs des domaines
-		int max = 0; //plus grandes valeurs des domaines
+		int min = this->k * this->k; //plus petites valeurs des domaines, initialise a la plus grande
+		int max = 0; //plus grandes valeurs des domaines, initialise a la plus petite
 		vector<int> afixer; //indice des cases qu'il reste a fixer
 		set<int> resteij;
 
 		//recherche du min et du max
 		for(j=0; j<this->k; ++j) { //pour toute les variables
 			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
-				if( (tmp = *min_element( this->grille.at(i).at(j).getrestant()->begin() , this->grille.at(i).at(j).getrestant()->end() ) ) < min ) {
+				//on trouve le min du domaine restant de (i,j) ou sa valeur si il est fixe et on le compare au min deja touve
+				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
 					min = tmp;
 				}
-				if( (tmp = *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end())) > max ) {
+				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval() ) > max ) {
 					max = tmp;
 				}
 				afixer.push_back(j);
@@ -114,10 +115,10 @@ void carre::filtrercolonne(const int j) {
 		//recherche du min et du max
 		for(i=0; i<this->k; ++i) { //pour toute les variables
 			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
-				if( (tmp = *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end())) < min ) {
+				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
 					min = tmp;
 				}
-				if( (tmp = *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end())) > max ) {
+				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) > max ) {
 					max = tmp;
 				}
 				afixer.push_back(i);
@@ -144,34 +145,87 @@ void carre::filtrercolonne(const int j) {
 }
 
 void carre::filtrersymetrie() {
-	//pour c[1,1] > c[1,n]
-	int min1 = *min_element(this->grille.at(0).at(this->k-1).getrestant()->begin(),this->grille.at(0).at(this->k-1).getrestant()->end());
-	//pour c[1,1] > c[n,n]
-	int min2 = *min_element(this->grille.at(this->k-1).at(this->k-1).getrestant()->begin(),this->grille.at(this->k-1).at(this->k-1).getrestant()->end());
-	//domaine de c[1,1]
-	set<int> reste = set<int>(* this->grille.at(0).at(0).getrestant());
+	int borne1, borne2, compt;
+	set<int> reste;
 
-	//filtrage
-	int compt = 0; //compte le nombre de valeur enleve
-	for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
-		if ( (*it <= min1) || (*it <= min2) ){
-			this->grille.at(0).at(0).enlever(*it);
-			++compt;
-		}
-	}
-	if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(0);}
+	//filtrage de c[1,1]
+	if (0 == this->grille.at(0).at(0).getval()) { //si elle n'est pas deja affecte
+		//pour c[1,1] > c[1,n]
+		borne1 = (0 == this->grille.at(0).at(this->k-1).getval()) ? *min_element(this->grille.at(0).at(this->k-1).getrestant()->begin(),this->grille.at(0).at(this->k-1).getrestant()->end()) : this->grille.at(0).at(this->k-1).getval();
+		//pour c[1,1] > c[n,n]
+		borne2 = (0 == this->grille.at(this->k-1).at(this->k-1).getval()) ? *min_element(this->grille.at(this->k-1).at(this->k-1).getrestant()->begin(),this->grille.at(this->k-1).at(this->k-1).getrestant()->end()) : this->grille.at(this->k-1).at(this->k-1).getval();
+		//domaine de c[1,1]
+		reste = set<int>(* this->grille.at(0).at(0).getrestant());
 
-	//filtrage de c[1,n] > c[n,1]
-	reste = set<int>(* this->grille.at(0).at(this->k-1).getrestant());
-	min1 = *min_element(this->grille.at(this->k-1).at(0).getrestant()->begin(),this->grille.at(this->k-1).at(0).getrestant()->end());
-	compt = 0; //compte le nombre de valeur enleve
-	for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
-		if ( *it <= min1){
-			this->grille.at(0).at(this->k-1).enlever(*it);
-			++compt;
+		//filtrage
+		compt = 0; //compte le nombre de valeur enleve
+
+		for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
+			if ( (*it <= borne1) || (*it <= borne2) ){
+				this->grille.at(0).at(0).enlever(*it);
+				++compt;
+			}
 		}
+		if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(0);}
 	}
-	if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(this->k-1);}
+
+	//filtrage de c[1,n]
+	if (0 == this->grille.at(0).at(this->k-1).getval()) {
+		//pour c[1,1] > c[1,n]
+		borne1 = (0 == this->grille.at(0).at(0).getval()) ? *max_element(this->grille.at(0).at(0).getrestant()->begin(),this->grille.at(0).at(0).getrestant()->end()) : this->grille.at(0).at(0).getval();
+		//pour c[1,n] > c[n,1]
+		borne2 = (0 == this->grille.at(this->k-1).at(0).getval()) ? *min_element(this->grille.at(this->k-1).at(0).getrestant()->begin(),this->grille.at(this->k-1).at(0).getrestant()->end()) : this->grille.at(this->k-1).at(0).getval();
+		//domaine de c[1,n]
+		reste = set<int>(* this->grille.at(0).at(this->k-1).getrestant());
+
+		//filtrage
+		compt = 0; //compte le nombre de valeur enleve
+
+		for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
+			if ( (*it >= borne1) || (*it <= borne2) ){
+				this->grille.at(0).at(this->k-1).enlever(*it);
+				++compt;
+			}
+		}
+		if (0 != compt) {this->filtrerligne(0); this->filtrercolonne(this->k-1);}
+	}
+
+	//filtrage de c[n,n]
+	if (0 == this->grille.at(this->k-1).at(this->k-1).getval()) {
+		//pour c[1,1] > c[n,n];
+		//borne1 = *max_element(this->grille.at(0).at(0).getrestant()->begin(),this->grille.at(0).at(0).getrestant()->end()); //la borne 1 ne change pas
+		//domaine de c[n,n]
+		reste = set<int>(* this->grille.at(this->k-1).at(this->k-1).getrestant());
+
+		//filtrage
+		compt = 0; //compte le nombre de valeur enleve
+
+		for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
+			if ( (*it >= borne1)){
+				this->grille.at(this->k-1).at(this->k-1).enlever(*it);
+				++compt;
+			}
+		}
+		if (0 != compt) {this->filtrerligne(this->k-1); this->filtrercolonne(this->k-1);}
+	}
+
+	//filtrage de c[n,1]
+	if (0 == this->grille.at(this->k-1).at(0).getval()) {
+		//pour c[1,n] > c[n,1]
+		borne1 = (0 == this->grille.at(0).at(this->k-1).getval()) ? *max_element(this->grille.at(0).at(this->k-1).getrestant()->begin(),this->grille.at(0).at(this->k-1).getrestant()->end()) : this->grille.at(0).at(this->k-1).getval();
+		//domaine de c[n,n]
+		reste = set<int>(* this->grille.at(this->k-1).at(0).getrestant());
+
+		//filtrage
+		compt = 0; //compte le nombre de valeur enleve
+		for(set<int>::iterator it = reste.begin() ; it!=reste.end() ; ++it) {
+			if ( (*it >= borne1)){
+				this->grille.at(this->k-1).at(0).enlever(*it);
+				++compt;
+			}
+		}
+		if (0 != compt) {this->filtrerligne(this->k-1); this->filtrercolonne(0);}
+	}
 
 }
 

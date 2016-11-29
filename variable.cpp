@@ -20,7 +20,8 @@ void variable::initialise(const int k, const int i, const int j) {
 	this->val = 0;
 	this->posi = i;
 	this->posj = j;
-
+	set<int> nouv;
+	this->historique.push_back(nouv); //pour avoir un premier historique (jamais utilise) pour le filtrage initial
 	for(int i = 1; i<=k*k; ++i) {
 		this->restant.insert(i);
 	}
