@@ -125,7 +125,7 @@ class carre {
 		*
 		* \return vrai ssi il y a au moins une variable auquel on ne peut assigner aucune valeur
 		*/ 
-		bool culdesac() const;
+		bool culdesac(const set<variable *> * const afaire) const;
 
 		/**
 		* \brief calcule la somme des valeur assigne sur la ligne i

@@ -63,7 +63,7 @@ void carre::filtrerligne(const int i) {
 	if (! this->allassignligne(i)) {
 		const int sum = this->suml(i); //on calule la somme actuelle de la ligne
 		int tmp, j;
-		int minval, maxval; //valeur etremes autorises
+		int minval, maxval; //valeur extremes autorises
 		int min = this->k * this->k; //plus petites valeurs des domaines, initialise a la plus grande
 		int max = 0; //plus grandes valeurs des domaines, initialise a la plus petite
 		vector<int> afixer; //indice des cases qu'il reste a fixer
@@ -71,15 +71,15 @@ void carre::filtrerligne(const int i) {
 
 		//recherche du min et du max
 		for(j=0; j<this->k; ++j) { //pour toute les variables
+			//on trouve le min du domaine restant de (i,j) ou sa valeur si il est fixe et on le compare au min deja touve
+			if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
+				min = tmp;
+			}
+			if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval() ) > max ) {
+				max = tmp;
+			}
 			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
-				//on trouve le min du domaine restant de (i,j) ou sa valeur si il est fixe et on le compare au min deja touve
-				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
-					min = tmp;
-				}
-				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval() ) > max ) {
-					max = tmp;
-				}
-				afixer.push_back(j);
+				afixer.push_back(j); //on utilise pas afaire car on ne veu que les variable de cette ligne
 			}
 		}
 
@@ -106,7 +106,7 @@ void carre::filtrercolonne(const int j) {
 	if (! this->allasigncolone(j)) {
 		const int sum = this->sumc(j); //on calule la somme actuelle de la colonne
 		int tmp, i;
-		int minval, maxval; //valeur etremes autorises
+		int minval, maxval; //valeur extremes autorises
 		int min = this->k * this->k; //plus petites valeurs des domaines
 		int max = 0; //plus grandes valeurs des domaines
 		vector<int> afixer; //indice des cases qu'il reste a fixer
@@ -114,14 +114,14 @@ void carre::filtrercolonne(const int j) {
 
 		//recherche du min et du max
 		for(i=0; i<this->k; ++i) { //pour toute les variables
+			if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
+				min = tmp;
+			}
+			if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) > max ) {
+				max = tmp;
+			}
 			if ( 0 == this->grille.at(i).at(j).getval() ) { //si la variable n'est fixe
-				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *min_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) < min ) {
-					min = tmp;
-				}
-				if( (tmp = (0 == this->grille.at(i).at(j).getval()) ? *max_element(this->grille.at(i).at(j).getrestant()->begin(),this->grille.at(i).at(j).getrestant()->end()) : this->grille.at(i).at(j).getval()) > max ) {
-					max = tmp;
-				}
-				afixer.push_back(i);
+				afixer.push_back(i); //on utilise pas afaire car on ne veu que les variable de cette colonne
 			}
 		}
 
@@ -260,20 +260,12 @@ bool carre::fini() const {
 	return res;
 }
 
-bool carre::culdesac() const {
-	bool res = false;
-	int i = 0;
-	int j;
-	while ( (! res) && (i<k) ) {
-		j = 0;
-		while ( (! res) && (j<k) ) {
-			res = res || ((this->grille.at(i).at(j).getrestant()->empty()) && (0 == this->grille.at(i).at(j).getval()));
-			++j;
-		}
-		++i;
+bool carre::culdesac(const set<variable *> * const afaire) const {
+	set<variable *>::iterator it = afaire->begin();
+	while ( (it != afaire->end()) && ( ! (*it)->getrestant()->empty() ) ) {
+		++it;
 	}
-
-	return res;
+	return it != afaire->end(); //si ce n'est pas cette condition d'arret c'est l'autre donc le domaine d'une varible non associe est vide
 }
 
 int carre::suml(const int i) const {

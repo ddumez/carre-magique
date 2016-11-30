@@ -4,8 +4,9 @@
  * \author Dorian D.
  */
 #include <functional>
-#include <queue>
+#include <set>
 #include <vector>
+#include <cmath>
 
 #ifndef COMPLET
 #define COMPLET
@@ -26,10 +27,23 @@ class mycomparison {
 };
 
 /**
-* \brief file de priorite pour prendre les variable en fonction de la taille du domaine restant
+* \brief compare des int pour avoir aproximativement les valeures mediannes en premier
 */
-typedef std::priority_queue<variable *,std::vector<variable *>,mycomparison> priority_queue_variable;
+class compint {
+	private:
+		int median;
 
+	public:
+ 		compint(const int median) {this->median = median;}
+
+	bool operator() (int lhs, int rhs) const {
+		if (abs(this->median - lhs) == abs(this->median - rhs)) {
+			return lhs < rhs;
+		} else {
+			return abs(this->median - lhs) < abs(this->median - rhs);
+		}
+  	}
+};
 
 /**
 * \brief retroune un carre magique normal de taille k remplit
@@ -47,6 +61,6 @@ carre * resolC(int k);
 * \param[in] j le second indice de la case que l'on doit fixer
 * \return si la grille a ete complete
 */
-bool resolCRec(carre * sol, priority_queue_variable * afaire);
+bool resolCRec(carre * sol, set<variable *> * afaire);
 
 #endif
