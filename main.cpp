@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	//variable
 		int k; //taille du carré magique
-		//carre * soluceC; //solution trouvé par l'algorithme complet
+		carre * soluceC; //solution trouvé par l'algorithme complet
 		grille * soluceI; //solution trouvé par l'algorithme incomplet
 		clock_t tc, ti, toti, max, min;
 	//début
@@ -33,21 +33,21 @@ int main(int argc, char *argv[]) {
 
 
 		//calculs
-		/*tc = clock();
+		tc = clock();
 		soluceC = resolC(k);
 		tc = clock() - tc;
-		*/ti = clock();
-		soluceI = resolI(k);
+		ti = clock();
+		//soluceI = resolI(k);
 		ti = clock() - ti;
 
 		//sorties
-		/*cout<<"temps de calcul de l'algo complet : "<<(double)((double)tc/(double)(CLOCKS_PER_SEC))<<endl;
+		cout<<"temps de calcul de l'algo complet : "<<(double)((double)tc/(double)(CLOCKS_PER_SEC))<<endl;
 		cout<<"solution trouvé par l'algorithme complet :"<<endl;
 		soluceC->affiche();
-		*/
+		
 		cout<<"temps de calcul de l'algo incomplet : "<<(double)((double)ti/(double)(CLOCKS_PER_SEC))<<endl;
 		cout<<"solution trouvé par l'algorithme incomplet :"<<endl;
-		soluceI->affiche();
+		//soluceI->affiche();
 
 		
 		toti = 0;
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 		cout<<"temps max de calcul : "<<(double)((double)max/(double)(CLOCKS_PER_SEC))<<endl;
 		
 	//fin
-	//delete(soluceC);
+	delete(soluceC);
 	delete(soluceI);
 	cout<<"\n\n"<<endl;
 return 0;

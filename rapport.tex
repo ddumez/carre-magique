@@ -17,23 +17,23 @@
 
 \subsection{Principe}
 
-Un solveur complet parcours virtuellement tout l'arbre des possible du problème, c'est à dire toutes les permutation possible. Mais en réalité il tente de construire une solution en essayant de déterminer, le pus tôt possible, si une configuration peu, ou non, mener à une solution. Cette méthode permet donc de déterminer si il n'y a pas de solution, ce de manière exacte, ou si il y en a une de la trouver. Tout cela modulo un temps de calcul qui peu être prohibitif.
+Un solveur complet parcours virtuellement tout l'arbre des possibles du problème, c'est à dire toutes les permutations possibles. Mais en réalité il tente de construire une solution en essayant de déterminer, le pus tôt possible, si une configuration peut, ou non, mener à une solution. Cette méthode permet donc de déterminer si il n'y a pas de solution, ce de manière exacte, et si il y en a une de la trouver. Tout cela modulo un temps de calcul qui peu être prohibitif.
 
 \subsection{Représentation mémoire}
 
-L’élément de base de la résolution est la variable. Cette structure représente l'ensemble des information sur une case de la grille. en effet chaque case à un domaine de valeur possible dépendant du carre magique étudie, de sa position et des valeurs déjà fixés. Au départ toutes les variables on comme domaine $\{ 1,2,..., k^2 \}$, où k est la taille du carre magique. On a aussi besoin de stocker sa valeur si elle été fixé, on remarque alors que cet valeur sert aussi à indiquer si elle n'a pas été fixé, en lui donnant une valeur non autorisé. De plus Pour la gestion du backtrack on utilise un historique des valeurs qui on été enlevé à son domaine de valeur possible. Enfin, pour des raisons pratiques, une variable connais sa position dans la grille.\\
+L’élément de base de la résolution est la variable. Cette structure représente l'ensemble des informations sur une case de la grille. En effet chaque case à un domaine de valeur possible dépendant du carre magique étudie, de sa position et des valeurs déjà fixés. Au départ toutes les variables ont comme domaine $\{ 1,2,..., k^2 \}$, où k est la taille du carre magique. On a aussi besoin de stocker sa valeur si elle été fixé, on remarque alors que cette valeur sert aussi à indiquer si elle n'a pas été fixé, en lui donnant une valeur non autorisé. De plus, pour la gestion du backtrack on utilise un historique des valeurs qui ont été enlevées de son domaine de valeur possible. Enfin, pour des raisons pratiques, une variable connais sa position dans la grille.\\
 
 La valeur de la variable est codé par un int. Une valeur admissible étant comprise entre $1$ et $k^2$, on initialise toujours celle ci à 0 pour indiquer que sa valeur n'a pas encore été choisie.\\
-L’ensemble des valeurs possible est stocke dans un ensemble d'entier (set\textless int\textgreater). En effet cette structure permet l'insertion et la suppression de valeur en temps logarithmique. De plus, étant donne qu'ils sont codé avec des AVL, cela pourrait aussi nous permettre d’accéder au extremum de ce domaine en temps logarithmique. Mais l'interface de la stl ne le permet pas donc on les recherche de manière classique, par parcours, en $O(taille)$.\\
-Enfin l'historique est une pile d'ensemble d'entier (stack< set<int> >). En effet On conserve les avantages des ensembles pour l'ajout et la suppression. Et pour l'historique on ne travaille que sur le dernier ensemble l'ajouté (celui correspondant à la dernière variable fixé), donc on prend tous les avantages de la pile pour ce genre d’opérations.\\
+L’ensemble des valeurs possible est stocké dans un ensemble d'entier (set\textless int\textgreater). En effet cette structure permet l'insertion et la suppression de valeur en temps logarithmique. De plus, étant donne qu'ils sont codé avec des AVL, cela pourrait aussi nous permettre d’accéder au extremum de ce domaine en temps logarithmique. Mais l'interface de la stl ne le permet pas, donc on les recherche de manière classique, par parcours, donc en $O(taille)$.\\
+Enfin l'historique est une pile d'ensemble d'entier (stack< set<int> >). En effet, on conserve les avantages des ensembles pour l'ajout et la suppression. Et pour l'historique on ne travaille que sur le dernier ensemble l'ajouté (celui correspondant à la dernière variable fixé), donc on prend tous les avantages de la pile pour ce genre d’opérations.\\
 
 \subsection{Filtrages}
 
-Le filtrage consiste à enlever préventivement des valeurs des domaines de valeurs restantes car l'affectation de ces dernière ne peu mener à une solution.\\
+Le filtrage consiste à enlever préventivement des valeurs des domaines de valeurs restantes, car l'affectation de ces dernières ne peu mener à une solution.\\
 
 Le premier filtrage est celui correspondant au allDiff. C'est à dire que lors de l'affectation d'une valeur à une variable on retire cette valeur de tous les autres domaines. C'est d’ailleurs durant ce procédé que l'on rajoute un nouvel ensemble (parfois vide si cette variable ne pouvait prendre cette valeur ou si elle possède déjà une valeur) au sommet de la pile d'historique.\\
 
-Le second filtrage est le cassage de symétrie. En effet un carre magique de taille k possède de nombreuse solutions. Donc pour restreindre le parcours de l'arbre de possible on restreins les solutions acceptables, de manière à être sûr qu'il y en ai toujours une. On a donc sur-contraint le problème avec :
+Le second filtrage est le cassage de symétrie. En effet un carre magique de taille k possède de nombreuse solutions. Donc pour restreindre le parcours de l'arbre des possibles on restreins les solutions acceptables, de manière à être sûr qu'il y en ai toujours une. On a donc sur-contraint le problème avec :
 \begin{itemize}
 \item
 $c\left[1,1\right] > c\left[1,n\right]$ pour casser les symétries gauche/droite
@@ -51,17 +51,17 @@ Le troisième filtrage consiste à enlever les valeurs qui ne permettront pas d�
 
 Après expérimentation sur minizinc j'ai choisis de fixer les variables avec le plus petit domaine restant en premier, et le tout en commençant par les valeurs médianes.\\
 
-On note toutes les variables qu'il reste à fixer grâce à un ensemble de pointeur vers ces variables (set\textless variable \textgreater). Cela permet l’ajout en la suppressions d'éléments très rapidement. Mais la valeur des éléments pour la comparaison (la taille de leur domaine restant) étant changeante on est obligé de parcourir tout l'ensemble à chaque fois pour trouver la variable à fixer (par expérimentation ce procédé améliore tout de même les performances).
+On note toutes les variables qu'il reste à fixer grâce à un ensemble de pointeur vers ces variables (set\textless variable \textgreater). Cela permet l’ajout en la suppressions d'éléments très rapidement. Mais la valeur des variables, pour la comparaison (la taille de leur domaine restant), étant changeante on est obligé de parcourir tout l'ensemble à chaque fois pour trouver la variable à fixer (par expérimentation ce procédé améliore tout de même les performances).
 
-Pour éviter la lourdeur du calcul de la médiane on se contente de prendre l’élément du domaine restant qui minimise la distance à $k^2 /2$. Étant donne que l'on ne peut pas bénéficier de la structure des set pour la recherche d’extremum on parcours l'ensemble du domaine restant à chaque fois (cela améliore aussi les performances).
+Pour éviter la lourdeur du calcul de la médiane on se contente de prendre l’élément du domaine restant qui minimise la distance à $k^2 /2$. Étant donné que l'on ne peut pas bénéficier de la structure des set pour la recherche d’extremum on parcours l'ensemble du domaine restant à chaque fois (cela améliore aussi les performances).
 
 \section{Solveur incomplet}
 
 \subsection{Principe}
 
-Le principe de mon solveur incomplet est de générer aléatoirement un grille contenant une unique fois tous les nombres de 1 à $k^2$ puis, par mouvement dans des voisinage, de trouver une solution.
-Pour se guider on quantifie la qualité de chaque solution grâce à une fonction d'évaluation. Ce dernière calcule la somme des carrés des différences entre la somme des lignes/colonnes/diagonales et le nombre magique : $\frac{ k (k^2 +1)}{2}$. De plus, par rapport au voisinage choisis, nous ne somme pas obligé de re-calculer le score en entier à chaque fois, mais juste ce qui à changé.
-On parcours alors les voisinage avec une heuristique de descente guidé par la fonction d'évaluation. Si la fonction tombe dans un minimum local elle effectue un restart pour recommencer d'un autre point de départ.\\
+Le principe de mon solveur incomplet est de générer aléatoirement une grille contenant une unique fois tous les nombres de 1 à $k^2$ puis, par mouvement dans des voisinages, de trouver une solution.
+Pour se guider on quantifie la qualité de chaque solution grâce à une fonction d'évaluation. Ce dernière calcule la somme des carrés des différences entre la somme des lignes/colonnes/diagonales et le nombre magique : $\frac{ k (k^2 +1)}{2}$. De plus, par rapport au voisinage choisis, nous ne sommes pas obligé de re-calculer le score en entier à chaque fois, mais juste ce qui à changé.
+On parcours alors le voisinage avec une heuristique de descente guidé par la fonction d'évaluation. Si la fonction tombe dans un minimum local elle effectue un restart pour recommencer d'un autre point de départ.\\
 
 On remarque tout de suite que cette procédure est très aléatoire. Mais pour pouvoir reproduire les expériences le générateur aléatoire est initialisé avec un graine constante au début du programme.
 
@@ -71,14 +71,14 @@ La grille est alors juste représenté comme un tableau en 2 dimension de taille
 
 \subsection{Voisinages}
 
-Deux structure de voisinage on été créé, mais par expérimentation seul ou combiner la solution consistant à n'utiliser que le deuxième a été retenue. Au départ l’idée était d'utiliser le première en descente puis, une fois dans un minimum local, d'utiliser le deuxième pour en sortir, car le premier plongeai très vite dans les minima locaux.\\
+Deux structures de voisinages ont été créées, mais par expérimentation seules ou combiné, la solution consistant à n'utiliser que le deuxième a été retenue. Au départ l’idée était d'utiliser le première en descente puis, une fois dans un minimum local, d'utiliser le deuxième pour en sortir, car le premier plongeai très vite dans les minima locaux.\\
 
-Le premier voisinage consistait, pour chaque ligne et colonne, à tester toutes les permutation de cette dernière et de sélectionner celle amenant au meilleur score.
+Le premier voisinage consistait, pour chaque ligne et colonne, à tester toutes les permutations de cette dernière et de sélectionner celle amenant au meilleur score.
 Premièrement la plus profonde descente est lente mais en plus cette heuristique plongeai remarquablement vite dans des minima locaux sans intérêt. Donc seule elle nécessitait un très grand nombre de restart, et combiné avec la deuxième c'est cette dernière qui faisait pratiquement tout le travail.\\
 
-La deuxième structure de voisinage est un swap. On l'applique cette fois ci en descente, c'est à dire que l'on teste toutes les permutations de deux éléments, et si cela améliore le score on garde la permutation. De plus il faut remarquer que l'on n’arrête pas le parcours dès la première modification concluante pour ne pas ce concentrer trop longtemps sur une même zone, ainsi on peut avoir une progressions homogène sur toute la grille. Cette structure de voisinage est nettement plus rapide à utiliser que la précédente et tombe moins souvent dans des minima locaux non solution (c'est à dire n'ayant pas un valeur de 0).\\
+La deuxième structure de voisinage est un swap. On l'applique cette fois ci en descente, c'est à dire que l'on teste toutes les permutations de deux éléments, et si cela améliore le score on garde la permutation. De plus il faut remarquer que l'on n’arrête pas le parcours dès la première modification concluante pour ne pas ce concentrer trop longtemps sur une même zone, ainsi on peut avoir une progressions homogène sur toute la grille. Cette structure de voisinage est nettement plus rapide à utiliser que la précédente et tombe moins souvent dans des minima locaux non solution (c'est à dire n'ayant pas une valeur de 0).\\
 
-En effet pour utilise tous ces voisinage il faut remarquer qu'une grille est solution si et seulement si son score est de 0. Cela veut alors dire que la somme de toutes les lignes/colonnes/diagonales/ sont égales au nombre magique. Mais étant donné que l'on ne travaille que sur des permutations le allDiff est nécessairement respecté.
+En effet pour utiliser tous ces voisinage il faut remarquer qu'une grille est solution si et seulement si son score est de 0. Cela veut alors dire que la somme de toutes les lignes/colonnes/diagonales sont égales au nombre magique. Et étant donné que l'on ne travaille que sur des permutations le allDiff est nécessairement respecté.
 
 \subsection{Autres essais}
 
@@ -86,10 +86,52 @@ En dehors des structures de voisinage plusieurs autres essais infructueux on ét
 
 L'initialisation de la grille avec la permutation identité à été utilisé. Et dans le cas d'un minimum local on effectuai plusieurs permutations dans la grille de manière aléatoire pour en sortir. Mais en expérimentation le premier minimum local atteint n’était pratiquement jamais la solution alors que cela arrive avec une initialisation aléatoire. Cette technique a donc été abandonné.\\
 
-D'autre fonction d'évaluation ont été utilisé, la meilleure (les moindre carré déjà présenté) à bien entendu été conservé. Une fonction considérai une solution comme meilleure si elle respectai plus de contraintes à l'égalité, mais elle produisait trop de score égaux. et une autre utilisait la valeur absolue au lieu du carré, mais elle ne pénalisait pas asse les grands écarts.
+D'autres fonctions d'évaluation ont été utilisées, la meilleure (les moindre carré déjà présenté) à bien entendu été conservé. Une fonction considérai une solution comme meilleure si elle respectai plus de contraintes à l'égalité, mais elle produisait trop de score égaux. Et une autre utilisait la valeur absolue au lieu du carré, mais elle ne pénalisait pas asse les grands écarts.
 
-\section{Tests}
+\newpage
+
+\section{Expérimentations}
 
 Il faut noter que l'algorithme complet indique bien l’absence de solution pour le cas du carre magique de taille 2 tandis que l'incomplet ne s'arrête pas.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|*{7}{c|}}
+  \hline
+  taille du carre & 1 & 2 & 3 & 4 & 5 & 6 \\
+  \hline
+  temps d’exécution & 3.8e-05 & 7e-05 & 0.000772 & 0.008885 & 9.71918 & 3.11742 \\
+  \hline
+\end{tabular}
+\caption{temps d’exécution de l'algorithme complet (en seconde)}
+\label{complet}
+\end{table}
+Au delà les temps de calcul deviennent trop grand.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|*{20}{c|}}
+  \hline
+  taille du carre & 1 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+  \hline
+  temps d’exécution & 3e-06 & 1.6e-05 & 8.9e-05 & 0.0128 & 0.0134 & 0.0643 & 0.0307 & 0.108 & 0.274 \\
+  \hline
+  rapport plus court/long & $\infty$ & 0.008 & 0.030 & 0.004 & 0.007 & 0.012 & 0.007 & 0.007 & 0.009 \\
+  \hline
+  taille du carre & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20  \\
+  \hline
+  temps d’exécution  & 0.183 & 0.325 & 0.784 & 3.40 & 2.19 & 1.28 & 1.22 & 9.53 & 25.68 & 13.08 \\
+  \hline
+  rapport plus court/long & 0.014 & 0.024 & 0.005 & 0.006 & 0.029 & 0.007 & 0.016 & 0.011 & 0.007 & 0.002\\
+  \hline
+\end{tabular}
+\caption{temps d’exécution de l'algorithme complet (en seconde)}
+\label{complet}
+\end{table}
+
+
+Les expérimentations sont effectués sur 30 exécutions, le temps donné est une moyenne sur ces 30 exécutions.
+L'algorithme fonctionne bien en moyenne mais il est très inconstant. En effet la plus longue exécution est souvent, au moins, 100 fois supérieure au temps de la plus rapide. 
+
 
 \end{document}
