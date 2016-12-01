@@ -5,6 +5,7 @@
  */
 
 #include <vector>
+#include <stack>
 #include <set>
 
 using namespace std;
@@ -20,7 +21,7 @@ class variable {
 		private:
 			int val; /*!<la valeur de la variable si celle ci est fixé, 0 sinon */
 			set<int> restant; /*!<ensemble des valeures possibles restantes*/
-			vector< set<int> > historique; /*!<historique des valeure enleve a restant par les dernier choix*/
+			stack< set<int> > historique; /*!<historique des valeure enleve a restant par les dernier choix*/
 			int posi; /*!<premier indice de la position de cette variable dans le carre*/
 			int posj; /*!<deuxieme indice de la position de cette variable dans le carre*/
 

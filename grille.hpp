@@ -55,7 +55,7 @@ class grille {
 		void put(const int i, const int j, const int val);
 
 		/**
-		* \brief retourne le plus petit nombre positif que l'on ne peut pasmettre dans notre grille
+		* \brief retourne le plus petit nombre positif que l'on ne peut pas mettre dans notre grille
 		*/
 		int borne() const;
 
@@ -147,7 +147,7 @@ class grille {
 		void restart();
 		
 		/**
-		* \brief parcour la grille et teste toutes les permutation possible de 2 element en les appliquan si elle ameliore le score
+		* \brief parcour la grille et teste toutes les permutation possible de 2 element en les appliquants si elle ameliore le score
 		*/
 		void perturbe();
 

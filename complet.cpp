@@ -52,6 +52,8 @@ bool resolCRec(carre * sol, set<variable *> * afaire) {
 				//la solution reste admissible
 				sol->filtrerligne(i);
 				sol->filtrercolonne(j);
+				sol->filtrerdiag1();
+				sol->filtrerdiag2();
 				sol->filtrersymetrie();
 
 				if ( !sol->culdesac(afaire) ){

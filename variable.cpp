@@ -21,7 +21,7 @@ void variable::initialise(const int k, const int i, const int j) {
 	this->posi = i;
 	this->posj = j;
 	set<int> nouv;
-	this->historique.push_back(nouv); //pour avoir un premier historique (jamais utilise) pour le filtrage initial
+	this->historique.push(nouv); //pour avoir un premier historique (jamais utilise) pour le filtrage initial
 	for(int i = 1; i<=k*k; ++i) {
 		this->restant.insert(i);
 	}
@@ -39,7 +39,7 @@ void variable::choix(const int val) {
 		nouv.insert(*it); //on copie les valeurs restantes (sauf celle utilise) pour l'historique
 		this->restant.erase(*it); //on vide l'ensemble des valeurs possible restante
 	}
-	this->historique.push_back(nouv);
+	this->historique.push(nouv);
 }
 
 void variable::nouveauchoix(const int val) {
@@ -47,12 +47,12 @@ void variable::nouveauchoix(const int val) {
 	if(1 == this->restant.erase(val)) { //si val est present dans restant l'enleve et retourne 1 sinon ne fait rien et retourne 0
 		nouv.insert(val);
 	}
-	this->historique.push_back(nouv);
+	this->historique.push(nouv);
 }
 
 void variable::enlever(const int val) {
 	if(1 == this->restant.erase(val)) {
-		this->historique.back().insert(val);
+		this->historique.top().insert(val);
 	}
 }
 
@@ -78,8 +78,8 @@ void variable::enleverval() {
 
 void variable::annule() {
 	//on remet toute les variables filtre par le dernier assignement dans restant
-	for(set<int>::iterator it = historique.back().begin() ; it!=historique.back().end() ; ++it) {
+	for(set<int>::iterator it = historique.top().begin() ; it!=historique.top().end() ; ++it) {
 		this->restant.insert(*it);
 	}
-	this->historique.pop_back();
+	this->historique.pop();
 }

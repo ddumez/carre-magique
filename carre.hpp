@@ -94,6 +94,18 @@ class carre {
 		void filtrercolonne(const int j);
 
 		/**
+		* \brief filtre les valeur possible sur la premiere diagonale apres une affectation sur celle ci
+		* si une variable est filtre sa ligne et sa colone le sera
+		*/
+		void filtrerdiag1();
+
+		/**
+		* \brief filtre les valeur possible sur la deuxieme diagonale apres une affectation sur celle ci
+		* si une variable est filtre sa ligne et sa colone le sera
+		*/
+		void filtrerdiag2();
+
+		/**
 		* \brief filtre le valeur possible des varible des coin pour eviter les symetries
 		* si une variable est filtre sa ligne et sa colone le seront
 		*/

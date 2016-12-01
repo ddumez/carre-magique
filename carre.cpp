@@ -144,6 +144,90 @@ void carre::filtrercolonne(const int j) {
 	}
 }
 
+void carre::filtrerdiag1() {
+	if (! this->allassignd1()) {
+		const int sum = this->sumd1(); //on calule la somme actuelle de la colonne
+		int tmp, i;
+		int minval, maxval; //valeur extremes autorises
+		int min = this->k * this->k; //plus petites valeurs des domaines
+		int max = 0; //plus grandes valeurs des domaines
+		vector<int> afixer; //indice des cases qu'il reste a fixer
+		set<int> resteij;
+
+		//recherche du min et du max
+		for(i=0; i<this->k; ++i) { //pour toute les variables
+			if( (tmp = (0 == this->grille.at(i).at(i).getval()) ? *min_element(this->grille.at(i).at(i).getrestant()->begin(),this->grille.at(i).at(i).getrestant()->end()) : this->grille.at(i).at(i).getval()) < min ) {
+				min = tmp;
+			}
+			if( (tmp = (0 == this->grille.at(i).at(i).getval()) ? *max_element(this->grille.at(i).at(i).getrestant()->begin(),this->grille.at(i).at(i).getrestant()->end()) : this->grille.at(i).at(i).getval()) > max ) {
+				max = tmp;
+			}
+			if ( 0 == this->grille.at(i).at(i).getval() ) { //si la variable n'est fixe
+				afixer.push_back(i); //on utilise pas afaire car on ne veu que les variable de cette colonne
+			}
+		}
+
+		//calcul des valeur extreme autorise
+		minval = this->nombremagique() - sum + (afixer.size() -1)*( (afixer.size() / 2) -1 -max);
+		maxval = this->nombremagique() - sum - (afixer.size() -1)*( (afixer.size() / 2) -1 +min);
+
+		//on filtre les valeurs non autorise
+		for(int i : afixer) {
+			resteij = set<int>(* this->grille.at(i).at(i).getrestant());
+			tmp = 0; //compte le nombre de valeur enleve
+			for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+				if ( (*it < minval) || (*it > maxval) ){
+					this->grille.at(i).at(i).enlever(*it);
+					++tmp;
+				}
+			}
+			if (0 != tmp) {this->filtrerligne(i); this->filtrercolonne(i);}
+		}
+	}
+}
+
+void carre::filtrerdiag2() {
+	if (! this->allassignd2()) {
+		const int sum = this->sumd2(); //on calule la somme actuelle de la colonne
+		int tmp, i;
+		int minval, maxval; //valeur extremes autorises
+		int min = this->k * this->k; //plus petites valeurs des domaines
+		int max = 0; //plus grandes valeurs des domaines	
+		vector<int> afixer; //indice des cases qu'il reste a fixer		
+		set<int> resteij;
+
+		//recherche du min et du max
+		for(i=0; i<this->k; ++i) { //pour toute les variables
+			if( (tmp = (0 == this->grille.at(i).at(this->k - i -1).getval()) ? *min_element(this->grille.at(i).at(this->k - i -1).getrestant()->begin(),this->grille.at(i).at(this->k - i -1).getrestant()->end()) : this->grille.at(i).at(this->k - i -1).getval()) < min ) {
+				min = tmp;
+			}
+			if( (tmp = (0 == this->grille.at(i).at(this->k - i -1).getval()) ? *max_element(this->grille.at(i).at(this->k - i -1).getrestant()->begin(),this->grille.at(i).at(this->k - i -1).getrestant()->end()) : this->grille.at(i).at(this->k - i -1).getval()) > max ) {
+				max = tmp;
+			}
+			if ( 0 == this->grille.at(i).at(this->k - i -1).getval() ) { //si la variable n'est fixe
+				afixer.push_back(i); //on utilise pas afaire car on ne veu que les variable de cette colonne
+			}
+		}
+
+		//calcul des valeur extreme autorise
+		minval = this->nombremagique() - sum + (afixer.size() -1)*( (afixer.size() / 2) -1 -max);
+		maxval = this->nombremagique() - sum - (afixer.size() -1)*( (afixer.size() / 2) -1 +min);
+
+		//on filtre les valeurs non autorise
+		for(int i : afixer) {
+			resteij = set<int>(* this->grille.at(i).at(this->k - i -1).getrestant());
+			tmp = 0; //compte le nombre de valeur enleve
+			for(set<int>::iterator it = resteij.begin() ; it!=resteij.end() ; ++it) {
+				if ( (*it < minval) || (*it > maxval) ){
+					this->grille.at(i).at(this->k - i -1).enlever(*it);
+					++tmp;
+				}
+			}
+			if (0 != tmp) {this->filtrerligne(i); this->filtrercolonne(this->k - i -1);}
+		}	
+	}
+}
+
 void carre::filtrersymetrie() {
 	int borne1, borne2, compt;
 	set<int> reste;
@@ -271,7 +355,7 @@ bool carre::culdesac(const set<variable *> * const afaire) const {
 int carre::suml(const int i) const {
 	int res = 0;
 	for(int j = 0; j<k; ++j) {
-		res += this->grille.at(i).at(j).getval();
+		res +=  this->grille.at(i).at(j).getval();
 	}
 	return res;
 }
@@ -333,8 +417,8 @@ bool carre::allassignd1 () const {
 bool carre::allassignd2() const {
 	bool res = true;
 	int i = 0;
-	while ( (i<k) && res ) {
-		res = res && (0 != this->grille.at(i).at(this->k - i).getval());
+	while ( (i<this->k) && res ) {
+		res = res && (0 != this->grille.at(i).at(this->k - i -1).getval());
 		++i;
 	}
 	return res;
